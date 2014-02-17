@@ -72,15 +72,17 @@
     <Compile Include="KeyboardInterface.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="GameProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameUnit.cs" />
+    <Compile Include="Sounds.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\hero.txt" />
+    <Content Include="music\music.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

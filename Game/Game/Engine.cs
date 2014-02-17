@@ -88,6 +88,7 @@
         }
         public virtual void Run()
         {
+            Sounds.SFX(Sounds.SoundEffects.Move);
             while (true)
             {
 
