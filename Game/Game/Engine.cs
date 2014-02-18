@@ -97,8 +97,9 @@
                 this.userInterface.ProcessInput(); // process event from the console
 
                 //Print health points of the player
+                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints / 10)+"%", new Point(1, 0), 8);
                 this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10), 
-                    new Point(3, 5), 10, ConsoleColor.Red, ConsoleColor.White);
+                    new Point(1, 8), 10, ConsoleColor.Red, ConsoleColor.White);
 
                 //Print all game units and move them if necessary
                 foreach (var obj in this.allObjects)
@@ -108,7 +109,7 @@
                     this.renderer.ReDraw(obj, false);
                 }
 
-                CollisionDispatcher.HandleCollisions(this.movingObjects, this.staticObjects);
+                CollisionDispatcher.HandleCollisions(this.movingObjects, this.staticObjects); // handle all collisions
 
                 //collect all destroyed objects
                 List<GameUnit> destroyedObjects = allObjects.FindAll(obj => obj.IsDestroyed);

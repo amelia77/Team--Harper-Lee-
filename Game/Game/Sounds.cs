@@ -6,7 +6,7 @@
     using System.Threading;
     public static class Sounds
     {
-        public enum SoundEffects { Move, BlockIsCemented, ClearLine, RecieveBonus, GameOver }
+        public enum SoundEffects { Move, EnemyIsDestroyed, BossIsDestroyed, RecieveBonus, GameOver }
         static int[,] musicSheet;
 
         public static void SFX(SoundEffects sfx)

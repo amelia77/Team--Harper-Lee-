@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace Game
 {
-    class ConsoleRenderer: IConsoleRenderer
+    public class ConsoleRenderer: IConsoleRenderer
     {
         int renderFieldMatrixRows;
         int renderFieldMatrixCols;

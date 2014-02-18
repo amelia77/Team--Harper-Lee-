@@ -21,7 +21,7 @@
             return new Point(a.Row - b.Row, a.Col - b.Col);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object obj) // So two point can be compared
         {
             Point objAsMatrixCoords = obj as Point;
 
@@ -30,7 +30,7 @@
 
         public override int GetHashCode()
         {
-            return this.Row.GetHashCode() * 7 + this.Col;
+            return base.GetHashCode();
         }
     }
 }

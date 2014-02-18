@@ -18,7 +18,7 @@ namespace Game
             this.HealthPoints = 100;
         }
 
-        public char[,] GetImage() 
+        public override char[,] GetImage() 
         {
            char[,] newImage = new char[this.image.GetLength(0), this.image.GetLength(1)];
             for (int row = 0; row < newImage.GetLength(0); row++)
