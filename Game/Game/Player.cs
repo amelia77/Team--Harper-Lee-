@@ -56,7 +56,7 @@ namespace Game
         public MovingUnit Shoot()
         {
             MovingUnit weapon = new Weapon(new Point(this.currTopLeftRow - 1, this.currTopLeftCol + (this.currTopLeftCol/2)-1), 
-                new char[,]{{'*'}}, new Point(-1,0), 3);
+                new char[,]{{'*'}}, new Point(-1,0), 3); // Create a common weapon
             return weapon;
         }
 
