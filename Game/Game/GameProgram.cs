@@ -31,6 +31,7 @@
         }
 
         //TEST COMMIT SASHO
+        //test commit miro
         static void Main()
         {
             IConsoleRenderer renderer = new ConsoleRenderer(WorldRows, WorldCols); 
