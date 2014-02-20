@@ -1,12 +1,15 @@
 ﻿namespace Game
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
    public class Engine
     {
+       private const long ElapsedTicks = 10000;
         private IConsoleRenderer renderer; // Console printer
         private IUserInterface userInterface; //event handler
+        private GameUnitGenerator unitGenerator;
 
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
@@ -14,13 +17,18 @@
 
         private Player player; //player
 
-        public Engine(IConsoleRenderer renderer, IUserInterface userInterface)
+        private Stopwatch stopWatch;
+
+        public Engine(IConsoleRenderer renderer, IUserInterface userInterface, GameUnitGenerator unitGenerator)
         {
             this.renderer = renderer;
             this.userInterface = userInterface;
+            this.unitGenerator = unitGenerator;
             this.staticObjects = new List<GameUnit>();
             this.movingObjects = new List<MovingUnit>();
             this.allObjects = new List<GameUnit>();
+            this.stopWatch = new Stopwatch();
+            stopWatch.Start();
         }
 
         private void AddStaticObject(GameUnit obj)
@@ -93,6 +101,12 @@
                 }
             }
         }
+
+        public virtual void GenerateUnit()
+        {
+            List<GameUnit> randomUnit = this.unitGenerator.GenerateStaticUnit(allObjects);
+            allObjects.AddRange(randomUnit);
+        }
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
@@ -102,6 +116,12 @@
                 Thread.Sleep(300);
 
                 this.userInterface.ProcessInput(); // process event from the console
+                if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
+                {
+                    this.GenerateUnit(); //Generate random unit;
+                    this.stopWatch.Restart();
+                }
+                
 
                 //Print health points of the player
                 this.renderer.WriteOnPosition("HP: " + (player.HealthPoints / 10)+"%", new Point(1, 0), 8);

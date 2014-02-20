@@ -10,9 +10,9 @@
 
         static void Initialize(Engine engine)
         {
-            char[,] hero = ImageProducer.GetImage(@"..\..\images\hero.txt");
+            char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
 
-            Player player = new Player(new Point(20, 10), hero);
+            Player player = new Player(new Point(20, 10), hero, ConsoleColor.Yellow);
             player.MoveMaxRow = 0;
             player.MoveMaxCol = 0;
 
@@ -36,8 +36,10 @@
             IConsoleRenderer renderer = new ConsoleRenderer(WorldRows, WorldCols); 
 
             IUserInterface keyboard = new KeyboardInterface();
+            Random randomGenerator = new Random();
+            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
 
-            Engine gameEngine = new Engine(renderer, keyboard);
+            Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
 
             keyboard.OnLeftPressed += (sender, eventInfo) =>
             {

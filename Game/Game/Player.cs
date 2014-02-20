@@ -25,10 +25,11 @@ namespace Game
            char[,] newImage = new char[this.image.GetLength(0), this.image.GetLength(1)];
             for (int row = 0; row < newImage.GetLength(0); row++)
 			{
-			 for (int col = 0; col < newImage.GetLength(1); col++)
-			{
-			     newImage[row,col] = this.image[row,col];
-             }
+                for (int col = 0; col < newImage.GetLength(1); col++)
+                {
+                    newImage[row, col] = this.image[row, col];
+
+                }
 			}
             return this.image;
         }

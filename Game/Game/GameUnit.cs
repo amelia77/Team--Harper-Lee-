@@ -13,9 +13,9 @@ namespace Game
         protected bool isDestroyed; // is object already destroyed
 
         public ConsoleColor ImageColor { get; set; }
-        protected GameUnit(Point TopLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
+        protected GameUnit(Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
         {
-            this.TopLeftCoords = TopLeftCoords;
+            this.TopLeftCoords = topLeftCoords;
             this.image = CopyImageMatrix(image);
             this.IsDestroyed = false;
             this.ImageColor = color;
@@ -64,8 +64,7 @@ namespace Game
 
             return result;
         }
-
-        
+       
         public virtual char[,] GetImage()
         {
             return this.CopyImageMatrix(this.image);
