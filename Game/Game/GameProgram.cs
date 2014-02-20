@@ -30,6 +30,7 @@
             
         }
 
+        //TEST COMMIT SASHO
         static void Main()
         {
             IConsoleRenderer renderer = new ConsoleRenderer(WorldRows, WorldCols); 
