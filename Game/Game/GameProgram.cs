@@ -13,6 +13,9 @@
             char[,] hero = ImageProducer.GetImage(@"..\..\images\hero.txt");
 
             Player player = new Player(new Point(20, 10), hero);
+            player.MoveMaxRow = 0;
+            player.MoveMaxCol = 0;
+
             engine.AddPlayer(player);
 
             char[,] cat = ImageProducer.GetImage(@"..\..\images\cat.txt");
@@ -53,6 +56,11 @@
             keyboard.OnDownPressed += (sender, eventInfo) =>
             {
                 gameEngine.MovePlayerDown();
+            };
+
+            keyboard.OnActionPressed += (sender, eventInfo) =>
+            {
+                gameEngine.PlayerShoot();
             };
 
             Initialize(gameEngine);

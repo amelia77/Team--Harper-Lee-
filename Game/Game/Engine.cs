@@ -65,6 +65,13 @@
         {
             this.player.MoveUp();
         }
+
+        public virtual void PlayerShoot()
+        {
+            MovingUnit weapon = this.player.Shoot();
+            this.movingObjects.Add(weapon);
+            this.allObjects.Add(weapon);
+        }
       
 
         public virtual void AddObject(GameUnit obj)

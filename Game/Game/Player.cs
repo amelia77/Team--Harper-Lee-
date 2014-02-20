@@ -8,6 +8,8 @@ namespace Game
         public int HealthPoints {get;  set;}
         private int currTopLeftRow;
         private int currTopLeftCol;
+        public int MoveMaxRow { get;  set; }
+        public int MoveMaxCol { get; set; }
 
         public Player(Point topLeft, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, color)
@@ -51,6 +53,13 @@ namespace Game
             currTopLeftRow++;
         }
 
+        public MovingUnit Shoot()
+        {
+            MovingUnit weapon = new Weapon(new Point(this.currTopLeftRow - 1, this.currTopLeftCol + (this.currTopLeftCol/2)-1), 
+                new char[,]{{'*'}}, new Point(-1,0), 3);
+            return weapon;
+        }
+
         public override string GetCollisionGroupString()
         {
             return Player.CollisionGroupString;
@@ -58,7 +67,8 @@ namespace Game
 
         public override bool CanCollideWith(string otherCollisionGroupString)
         {
-            return otherCollisionGroupString == "wall" || otherCollisionGroupString == Player.CollisionGroupString || otherCollisionGroupString == "enemy";
+            return otherCollisionGroupString == "weapon" || otherCollisionGroupString == Player.CollisionGroupString || 
+                otherCollisionGroupString == "enemy";
         }
 
         public override void RespondToCollision(CollisionData collisionData)

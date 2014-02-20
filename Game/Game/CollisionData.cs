@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     public class CollisionData
     {
-        public readonly Point CollisionForceDirection;
+        public readonly Point CollisionForceDirection; // direction of the current game unit
         public readonly List<string> hitObjectsCollisionGroupStrings;
 
         public CollisionData(Point collisionForceDirection, string objectCollisionGroupString)
