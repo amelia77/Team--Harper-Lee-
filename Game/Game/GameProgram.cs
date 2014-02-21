@@ -32,6 +32,7 @@
 
         //TEST COMMIT SASHO
         //test commit miro
+        //Stef: I <3 Github
         static void Main()
         {
             IConsoleRenderer renderer = new ConsoleRenderer(WorldRows, WorldCols); 
