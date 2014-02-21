@@ -3,35 +3,34 @@ namespace Game
 {
     public class Enemy : MovingUnit
     {
-        public new const string CollisionGroupString = "enemy";
+        public Status status = Status.Enemy;
 
         public Enemy(Point topLeft, char[,] image, Point speed, ConsoleColor color)
             : base(topLeft, image, speed, color)
         {
         }
 
-        public override bool CanCollideWith(string otherCollisionGroupString)
+        public override bool CanCollideWith(Status otherStatus)
         {
-            return otherCollisionGroupString == "player" || otherCollisionGroupString == "enemy";
+            return otherStatus == Status.Player || otherStatus == Status.Enemy;
         }
 
-        public override string GetCollisionGroupString()
+        public override Status GetStatus()
         {
-            return Enemy.CollisionGroupString;
+            return this.status;
         }
 
         public override void RespondToCollision(CollisionData collisionData)
         {
             if (collisionData.CollisionForceDirection.Row * this.Speed.Row < 0)
             {
-               
                 this.Speed.Row = 1;
             }
             if (collisionData.CollisionForceDirection.Col * this.Speed.Col < 0)
             {
                 this.Speed.Col = 0;
             }
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains("enemy"))
+            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
             {
                 //this.Speed.Row = 1;
                 //this.Speed.Col = 0;
@@ -44,7 +43,7 @@ namespace Game
 
         public override void Move()
         {
-            if (this.topLeftCoords.Row<1)
+            if (this.topLeftCoords.Row < 1)
             {
                 this.Speed.Row = 1;
             }

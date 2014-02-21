@@ -1,14 +1,15 @@
-﻿using System;
-namespace Game
+﻿namespace Game
 {
-    public class Player:GameUnit,ICollidable
-    {
-        public new const string CollisionGroupString = "player";
+    using System;
 
-        public int HealthPoints {get;  set;}
+    public class Player : GameUnit, ICollidable
+    {
+        public Status status = Status.Player;
+
+        public int HealthPoints { get; set; }
         private int currTopLeftRow;
         private int currTopLeftCol;
-        public int MoveMaxRow { get;  set; }
+        public int MoveMaxRow { get; set; }
         public int MoveMaxCol { get; set; }
 
         public Player(Point topLeft, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
@@ -20,23 +21,23 @@ namespace Game
             this.HealthPoints = 100;
         }
 
-        public override char[,] GetImage() 
+        public override char[,] GetImage()
         {
-           char[,] newImage = new char[this.image.GetLength(0), this.image.GetLength(1)];
+            char[,] newImage = new char[this.image.GetLength(0), this.image.GetLength(1)];
             for (int row = 0; row < newImage.GetLength(0); row++)
-			{
+            {
                 for (int col = 0; col < newImage.GetLength(1); col++)
                 {
                     newImage[row, col] = this.image[row, col];
 
                 }
-			}
+            }
             return this.image;
         }
- 
+
         public void MoveLeft()
         {
-            currTopLeftCol--;  
+            currTopLeftCol--;
         }
 
         public void MoveRight()
@@ -56,20 +57,20 @@ namespace Game
 
         public MovingUnit Shoot()
         {
-            MovingUnit weapon = new Weapon(new Point(this.currTopLeftRow - 1, this.currTopLeftCol + (this.currTopLeftCol/2)-1), 
-                new char[,]{{'*'}}, new Point(-1,0), 3); // Create a common weapon
+            MovingUnit weapon = new Weapon(new Point(this.currTopLeftRow - 1, this.currTopLeftCol + (this.currTopLeftCol / 2) - 1),
+                new char[,] { { '*' } }, new Point(-1, 0), 3); // Create a common weapon
             return weapon;
         }
 
-        public override string GetCollisionGroupString()
+        public override Status GetStatus()
         {
-            return Player.CollisionGroupString;
+            return Status.Player;
         }
 
-        public override bool CanCollideWith(string otherCollisionGroupString)
+        public override bool CanCollideWith(Status otherStatus)
         {
-            return otherCollisionGroupString == "weapon" || otherCollisionGroupString == Player.CollisionGroupString || 
-                otherCollisionGroupString == "enemy";
+            return otherStatus == Status.Weapon || otherStatus == this.status ||
+                otherStatus == Status.Weapon;
         }
 
         public override void RespondToCollision(CollisionData collisionData)
@@ -77,13 +78,13 @@ namespace Game
 
             if (collisionData.CollisionForceDirection.Row * this.currTopLeftRow < 0)
             {
-               // ....
+                // ....
             }
             if (collisionData.CollisionForceDirection.Col * this.currTopLeftCol < 0)
             {
-               //......
+                //......
             }
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains("enemy"))
+            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
             {
                 this.HealthPoints -= 10;
             }
@@ -91,12 +92,12 @@ namespace Game
 
         public override void Move()
         {
-            if (this.currTopLeftRow<0)
+            if (this.currTopLeftRow < 0)
             {
                 this.currTopLeftRow = 0;
             }
 
-            if (this.currTopLeftCol<0)
+            if (this.currTopLeftCol < 0)
             {
                 this.currTopLeftCol = 0;
             }

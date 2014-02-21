@@ -4,14 +4,17 @@
     public class Weapon : MovingUnit, IMovable, IWeapon, ICollidable
     {
         private int damage;
+        private int ammo;
 
-        public const string CollisionGroupString = "weapon";
+        public Status status = Status.Weapon;
 
         public Weapon(Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
         {
             this.Damage = damage;
+            this.Ammo = ammo;
         }
+
         public int Damage
         {
             get
@@ -28,14 +31,30 @@
             }
         }
 
-        public override string GetCollisionGroupString()
+        public int Ammo
         {
-            return Player.CollisionGroupString;
+            get
+            {
+                return this.ammo;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Ammo value can't be negative!");
+                }
+                this.ammo = value;
+            }
         }
 
-        public override bool CanCollideWith(string otherCollisionGroupString)
+        public override Status GetStatus()
         {
-            return otherCollisionGroupString == "enemy" || otherCollisionGroupString == "player";
+            return this.status;
+        }
+
+        public override bool CanCollideWith(Status otherStatus)
+        {
+            return otherStatus == Status.Enemy || otherStatus == Status.Player;
         }
 
         public override void RespondToCollision(CollisionData collisionData)

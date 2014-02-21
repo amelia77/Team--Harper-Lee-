@@ -1,13 +1,10 @@
-﻿
-using System.Collections.Generic;
-using System;
-namespace Game
+﻿namespace Game
 {
-    public abstract class GameUnit: IObjectRenderable, IMovable, IObjectProducer, ICollidable
+    using System.Collections.Generic;
+    using System;
+
+    public abstract class GameUnit : IObjectRenderable, IMovable, IObjectProducer, ICollidable
     {
-
-        public const string CollisionGroupString = "object";
-
         protected Point topLeftCoords; //top left object point
         protected char[,] image; //image of the object 
         protected bool isDestroyed; // is object already destroyed
@@ -20,7 +17,7 @@ namespace Game
             this.IsDestroyed = false;
             this.ImageColor = color;
         }
- 
+
         public Point TopLeftCoords
         {
             get
@@ -64,7 +61,7 @@ namespace Game
 
             return result;
         }
-       
+
         public virtual char[,] GetImage()
         {
             return this.CopyImageMatrix(this.image);
@@ -86,16 +83,6 @@ namespace Game
         {
         }
 
-        public virtual bool CanCollideWith(string otherCollisionGroupString)
-        {
-            return GameUnit.CollisionGroupString == otherCollisionGroupString;
-        }
-
-        public virtual string GetCollisionGroupString()
-        {
-            return GameUnit.CollisionGroupString;
-        }
-
         public virtual List<Point> GetCollisionProfile()
         {
             List<Point> profile = new List<Point>();
@@ -114,5 +101,15 @@ namespace Game
             return profile;
         }
 
+
+        public virtual bool CanCollideWith(Status otherStatus)
+        {
+            return false;
+        }
+
+        public virtual Status GetStatus()
+        {
+            return Status.EmptyUnit;
+        }
     }
 }

@@ -1,27 +1,28 @@
 ﻿namespace Game
 {
     using System.Collections.Generic;
+
     public class CollisionData
     {
         public readonly Point CollisionForceDirection; // direction of the current game unit
-        public readonly List<string> hitObjectsCollisionGroupStrings;
+        public readonly List<Status> hitObjectsCollisionGroupStrings;
 
-        public CollisionData(Point collisionForceDirection, string objectCollisionGroupString)
+        public CollisionData(Point collisionForceDirection, Status objectCollisionGroupString)
         {
             this.CollisionForceDirection = collisionForceDirection;
-            this.hitObjectsCollisionGroupStrings = new List<string>();
+            this.hitObjectsCollisionGroupStrings = new List<Status>();
             this.hitObjectsCollisionGroupStrings.Add(objectCollisionGroupString);
         }
 
-        public CollisionData(Point collisionForceDirection, List<string> hitObjectsCollisionGroupStrings)
+        public CollisionData(Point collisionForceDirection, List<Status> hitObjectsCollisionGroupStrings)
         {
             this.CollisionForceDirection = collisionForceDirection;
 
-            this.hitObjectsCollisionGroupStrings = new List<string>();
+            this.hitObjectsCollisionGroupStrings = new List<Status>();
 
-            foreach (var str in hitObjectsCollisionGroupStrings)
+            foreach (Status status in hitObjectsCollisionGroupStrings)
             {
-                this.hitObjectsCollisionGroupStrings.Add(str);
+                this.hitObjectsCollisionGroupStrings.Add(status);
             }
         }
     }

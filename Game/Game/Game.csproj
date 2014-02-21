@@ -79,6 +79,7 @@
     <Compile Include="GameUnit.cs" />
     <Compile Include="Sounds.cs" />
     <Compile Include="StaticUnit.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

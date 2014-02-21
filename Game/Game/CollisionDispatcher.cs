@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    public static class CollisionDispatcher{
-    public static void HandleCollisions(List<MovingUnit> movingObjects, List<GameUnit> staticObjects)
+
+    public static class CollisionDispatcher
+    {
+        public static void HandleCollisions(List<MovingUnit> movingObjects, List<GameUnit> staticObjects)
         {
             HandleMovingWithStaticCollisions(movingObjects, staticObjects);
             HandleMovingWithMovingCollisions(movingObjects);
@@ -24,7 +26,7 @@
                     movingCollisionForceDirection.Row = -movingObject.Speed.Row;
                     staticObjects[verticalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                 }
 
@@ -33,7 +35,7 @@
                     movingCollisionForceDirection.Col = -movingObject.Speed.Col;
                     staticObjects[horizontalIndex].RespondToCollision(
                         new CollisionData(new Point(0, movingObject.Speed.Col),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                 }
 
@@ -48,26 +50,26 @@
 
                         staticObjects[diagonalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                     }
                 }
 
-                List<string> hitByMovingCollisionGroups = new List<string>();
+                List<Status> hitByMovingCollisionGroups = new List<Status>();
 
-                if(verticalIndex != -1)
+                if (verticalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(staticObjects[verticalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(staticObjects[verticalIndex].GetStatus());
                 }
 
-                if(horizontalIndex != -1)
+                if (horizontalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(staticObjects[horizontalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(staticObjects[horizontalIndex].GetStatus());
                 }
 
-                if(diagonalIndex != -1)
+                if (diagonalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(staticObjects[diagonalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(staticObjects[diagonalIndex].GetStatus());
                 }
 
                 if (verticalIndex != -1 || horizontalIndex != -1 || diagonalIndex != -1)
@@ -134,7 +136,7 @@
 
             foreach (var obj in objects)
             {
-                if (moving.CanCollideWith(obj.GetCollisionGroupString()) || obj.CanCollideWith(moving.GetCollisionGroupString()))
+                if (moving.CanCollideWith(obj.GetStatus()) || obj.CanCollideWith(moving.GetStatus()))
                 {
                     List<Point> objProfile = obj.GetCollisionProfile();
 
@@ -184,7 +186,7 @@
                     movingCollisionForceDirection.Row = -movingObject.Speed.Row;
                     movingObjects[verticalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                 }
 
@@ -193,7 +195,7 @@
                     movingCollisionForceDirection.Col = -movingObject.Speed.Col;
                     movingObjects[horizontalIndex].RespondToCollision(
                         new CollisionData(new Point(0, movingObject.Speed.Col),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                 }
 
@@ -209,26 +211,26 @@
 
                         movingObjects[diagonalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetCollisionGroupString())
+                            movingObject.GetStatus())
                             );
                     }
                 }
 
-                List<string> hitByMovingCollisionGroups = new List<string>();
+                List<Status> hitByMovingCollisionGroups = new List<Status>();
 
                 if (verticalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(movingObjects[verticalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(movingObjects[verticalIndex].GetStatus());
                 }
 
                 if (horizontalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(movingObjects[horizontalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(movingObjects[horizontalIndex].GetStatus());
                 }
 
                 if (diagonalIndex != -1)
                 {
-                    hitByMovingCollisionGroups.Add(movingObjects[diagonalIndex].GetCollisionGroupString());
+                    hitByMovingCollisionGroups.Add(movingObjects[diagonalIndex].GetStatus());
                 }
 
                 if (verticalIndex != -1 || horizontalIndex != -1 || diagonalIndex != -1)
@@ -296,7 +298,7 @@
 
             foreach (var obj in objects)
             {
-                if (moving.CanCollideWith(obj.GetCollisionGroupString()) || obj.CanCollideWith(moving.GetCollisionGroupString()))
+                if (moving.CanCollideWith(obj.GetStatus()) || obj.CanCollideWith(moving.GetStatus()))
                 {
                     List<Point> objProfile = obj.GetCollisionProfile();
 
