@@ -9,6 +9,17 @@ namespace Game
         int renderFieldMatrixCols;
         char[,] renderGameFieldMatrix;
 
+        public ConsoleRenderer(int visibleConsoleRows, int visibleConsoleCols)
+        {
+            renderGameFieldMatrix = new char[visibleConsoleRows, visibleConsoleCols];
+
+            this.renderFieldMatrixRows = renderGameFieldMatrix.GetLength(0);
+            this.renderFieldMatrixCols = renderGameFieldMatrix.GetLength(1);
+
+            Console.BufferHeight = Console.WindowHeight = renderFieldMatrixRows;
+            Console.BufferWidth = Console.WindowWidth = renderFieldMatrixCols;
+        }
+
         public void WriteOnPosition(
             string text,
             Point topLeft,
@@ -59,15 +70,6 @@ namespace Game
             WriteOnPosition(new string('═', text.Length), left + 1, top + 2, foregroundColor, backgroundColor);
 
             WriteOnPosition(text, left + 1, top + 1, foregroundColor, backgroundColor);
-        }
-
-
-        public ConsoleRenderer(int visibleConsoleRows, int visibleConsoleCols)
-        {
-            renderGameFieldMatrix = new char[visibleConsoleRows, visibleConsoleCols];
-
-            this.renderFieldMatrixRows = renderGameFieldMatrix.GetLength(0);
-            this.renderFieldMatrixCols = renderGameFieldMatrix.GetLength(1);
         }
 
         public void ReDraw(IObjectRenderable obj, bool clear)
