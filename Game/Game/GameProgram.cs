@@ -2,13 +2,13 @@
 {
     using System;
     using System.Threading;
-    class GameProgram
+    public class GameProgram
     {
-        const int WorldRows = 30;
-        const int WorldCols = 60;
+        public const int WORLD_ROWS = 30;
+        public const int WORLD_COLS = 60;
         //const int RacketLength = 6;
 
-        static void Initialize(Engine engine)
+        public static void Initialize(Engine engine)
         {
             char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
 
@@ -35,42 +35,13 @@
         //Stef: I <3 Github
         static void Main()
         {
-            IConsoleRenderer renderer = new ConsoleRenderer(WorldRows, WorldCols); 
-
+            IConsoleRenderer renderer = new ConsoleRenderer(GameProgram.WORLD_ROWS, GameProgram.WORLD_COLS);
             IUserInterface keyboard = new KeyboardInterface();
-            Random randomGenerator = new Random();
-            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
 
-            Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
 
-            keyboard.OnLeftPressed += (sender, eventInfo) =>
-            {
-                gameEngine.MovePlayerLeft();
-            };
+            Menu.EnterMenu(renderer, keyboard);
 
-            keyboard.OnRightPressed += (sender, eventInfo) =>
-            {
-                gameEngine.MovePlayerRight();
-            };
-
-            keyboard.OnUpPressed += (sender, eventInfo) =>
-            {
-                gameEngine.MovePlayerUp();
-            };
-
-            keyboard.OnDownPressed += (sender, eventInfo) =>
-            {
-                gameEngine.MovePlayerDown();
-            };
-
-            keyboard.OnActionPressed += (sender, eventInfo) =>
-            {
-                gameEngine.PlayerShoot();
-            };
-
-            Initialize(gameEngine);
-
-            gameEngine.Run();
+                  
         }
     }
 }

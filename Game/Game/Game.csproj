@@ -61,6 +61,7 @@
     <Compile Include="ConsoleRenderer.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameUnitGenerator.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="IWeapon.cs" />
     <Compile Include="MovingUnit.cs" />
     <Compile Include="Engine.cs" />

@@ -15,7 +15,7 @@
                         this.OnLeftPressed(this, new EventArgs());
                     }
                 }
-
+                
                 if (keyInfo.Key.Equals(ConsoleKey.RightArrow))
                 {
                     if (this.OnRightPressed != null)
@@ -47,6 +47,14 @@
                         this.OnActionPressed(this, new EventArgs());
                     }
                 }
+
+                if (keyInfo.Key.Equals(ConsoleKey.Escape))
+                {
+                    if (this.OnEscapePressed != null)
+                    {
+                        this.OnEscapePressed(this, new EventArgs());
+                    }
+                }
             }
         }
 
@@ -59,5 +67,7 @@
         public event EventHandler OnDownPressed;
 
         public event EventHandler OnActionPressed;
+
+        public event EventHandler OnEscapePressed;
     }
 }

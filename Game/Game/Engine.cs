@@ -6,10 +6,11 @@ using System.Diagnostics;
 using System.Threading;
    public class Engine
     {
-       private const long ElapsedTicks = 10000;
+        private const long ElapsedTicks = 10000;
         private IConsoleRenderer renderer; // Console printer
         private IUserInterface userInterface; //event handler
         private GameUnitGenerator unitGenerator;
+        private bool IN_LOOP = true;
 
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
@@ -80,7 +81,11 @@ using System.Threading;
             this.movingObjects.Add(weapon); // add it in the list with moving objects
             this.allObjects.Add(weapon);
         }
-      
+
+        public virtual void Break()
+        {
+            IN_LOOP = false;
+        }
 
         public virtual void AddObject(GameUnit obj)
         {
@@ -110,11 +115,8 @@ using System.Threading;
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
-            while (true)
+            while (IN_LOOP)
             {
-
-                Thread.Sleep(300);
-
                 this.userInterface.ProcessInput(); // process event from the console
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
                 {
@@ -122,7 +124,6 @@ using System.Threading;
                     this.stopWatch.Restart();
                 }
                 
-
                 //Print health points of the player
                 this.renderer.WriteOnPosition("HP: " + (player.HealthPoints / 10)+"%", new Point(1, 0), 8);
                 this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10), 
@@ -147,6 +148,7 @@ using System.Threading;
 
                 this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
 
+                Thread.Sleep(300);
             }
         }
     }

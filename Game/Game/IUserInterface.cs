@@ -12,6 +12,8 @@
         event EventHandler OnDownPressed;
 
         event EventHandler OnActionPressed;
+
+        event EventHandler OnEscapePressed;
         void ProcessInput();
     }
 }
