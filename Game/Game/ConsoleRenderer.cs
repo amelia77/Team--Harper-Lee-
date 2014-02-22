@@ -63,11 +63,11 @@ namespace Game
             WriteOnPosition('╚', left, top + 2, foregroundColor, backgroundColor);
             WriteOnPosition('╝', left + text.Length + 1, top + 2, foregroundColor, backgroundColor);
 
-            WriteOnPosition('║', left, top + 1, foregroundColor, backgroundColor);
-            WriteOnPosition('║', left + text.Length + 1, top + 1, foregroundColor, backgroundColor);
+            WriteOnPosition('|', left, top + 1, foregroundColor, backgroundColor);
+            WriteOnPosition('|', left + text.Length + 1, top + 1, foregroundColor, backgroundColor);
 
-            WriteOnPosition(new string('═', text.Length), left + 1, top, foregroundColor, backgroundColor);
-            WriteOnPosition(new string('═', text.Length), left + 1, top + 2, foregroundColor, backgroundColor);
+            WriteOnPosition(new string('~', text.Length), left + 1, top, foregroundColor, backgroundColor);
+            WriteOnPosition(new string('~', text.Length), left + 1, top + 2, foregroundColor, backgroundColor);
 
             WriteOnPosition(text, left + 1, top + 1, foregroundColor, backgroundColor);
         }
@@ -97,7 +97,6 @@ namespace Game
                     }
                     else
                     {
-
                         Console.Write(obj.GetImage()[row - obj.GetTopLeftCoords().Row, col - obj.GetTopLeftCoords().Col]);
                     }
                 }
@@ -129,7 +128,7 @@ namespace Game
             }
             }
 
-        private static void WriteOnPosition(
+        public void WriteOnPosition(
            string text,
            int left = 0,
            int top = 0,
@@ -141,5 +140,11 @@ namespace Game
             Console.BackgroundColor = backgroundColor;
             Console.Write(text);
         }
+
+        public void ClearScreen()
+        {
+            Console.Clear();
+        }
     }
+
 }

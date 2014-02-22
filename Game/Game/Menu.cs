@@ -12,20 +12,12 @@ namespace Game
         private static string[] menu = new string[]
         {
             "Start Game",
+            "Continue Game",
             "Level",
             "Exit"
         };
 
-        static void DrawText(int x, int y, string text, ConsoleColor textColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.ForegroundColor = textColor;
-            Console.BackgroundColor = backgroundColor;
-            Console.Write(text);
-            Console.ResetColor();
-        }
-
-        private static int ChooseFromMenu()
+        private static int ChooseFromMenu(IConsoleRenderer renderer)
         {
             while (true)
             {
@@ -68,21 +60,21 @@ namespace Game
                     Console.ReadKey(true);
                 }
 
-                Console.Clear();
+                renderer.ClearScreen();
 
-                for (int i = 0, rowSpace = 0; i < menu.Length; i++, rowSpace += 2)
+                for (int i = 0, rowSpace = 0; i < menu.Length; i++, rowSpace += 3)
                 {
                     if (i == choice)
                     {
-                        DrawText(x + i * 8 - 1, y + rowSpace, "[" + menu[i] + "]", ConsoleColor.White, ConsoleColor.Red);
+                        renderer.DrawTextBoxTopLeft(menu[i], x + i * (x / 3) - 1, y + rowSpace - 2, ConsoleColor.White);
                     }
                     else
                     {
-                        DrawText(x + i * 8, y + rowSpace, menu[i]);
+                        renderer.WriteOnPosition(menu[i], x + i * (x / 3), y + rowSpace - 1);
                     }
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(150);
             }
         }
         
@@ -130,17 +122,22 @@ namespace Game
 
             while (IN_LOOP)
             {
-                int choice = ChooseFromMenu();
+                int choice = ChooseFromMenu(renderer);
 
                 switch (choice)
                 {
                     case 0:
                         {
-                            Console.Clear();
+                            renderer.ClearScreen();
                             gameEngine.inLoop = true;
                             gameEngine.Run();
                         }
                         break;
+
+                    //case 1:
+                      //  {
+                        //    Console.Clear();
+                        //}
 
                     case 3:
                         IN_LOOP = false;

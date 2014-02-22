@@ -112,6 +112,7 @@ using System.Threading;
             List<GameUnit> randomUnit = this.unitGenerator.GenerateStaticUnit(allObjects);
             allObjects.AddRange(randomUnit);
         }
+
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
@@ -150,6 +151,11 @@ using System.Threading;
 
                 Thread.Sleep(300);
             }
+        }
+
+        public void Reset()
+        { 
+            
         }
     }
 }

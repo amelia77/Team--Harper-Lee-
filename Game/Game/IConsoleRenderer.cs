@@ -20,5 +20,14 @@ namespace Game
             ConsoleColor backgroundColor = ConsoleColor.Black);
 
         void ClearDestroyedObjects(List<GameUnit> destroyedObjects);
+
+        void WriteOnPosition(
+            string text,
+            int left = 0,
+            int top = 0,
+            ConsoleColor foregroundColor = ConsoleColor.White,
+            ConsoleColor backgroundColor = ConsoleColor.Black);
+
+        void ClearScreen();
     }
 }
