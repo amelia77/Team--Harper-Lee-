@@ -10,7 +10,7 @@ using System.Threading;
         private IConsoleRenderer renderer; // Console printer
         private IUserInterface userInterface; //event handler
         private GameUnitGenerator unitGenerator;
-        private bool IN_LOOP = true;
+        public bool inLoop = true;
 
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
@@ -84,7 +84,7 @@ using System.Threading;
 
         public virtual void Break()
         {
-            IN_LOOP = false;
+            inLoop = false;
         }
 
         public virtual void AddObject(GameUnit obj)
@@ -115,7 +115,7 @@ using System.Threading;
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
-            while (IN_LOOP)
+            while (inLoop)
             {
                 this.userInterface.ProcessInput(); // process event from the console
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)

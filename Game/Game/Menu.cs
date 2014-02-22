@@ -91,6 +91,43 @@ namespace Game
         {
             bool IN_LOOP = true;
 
+            Random randomGenerator = new Random();
+            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
+
+            Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
+
+            keyboard.OnLeftPressed += (sender, eventInfo) =>
+            {
+                gameEngine.MovePlayerLeft();
+            };
+
+            keyboard.OnRightPressed += (sender, eventInfo) =>
+            {
+                gameEngine.MovePlayerRight();
+            };
+
+            keyboard.OnUpPressed += (sender, eventInfo) =>
+            {
+                gameEngine.MovePlayerUp();
+            };
+
+            keyboard.OnDownPressed += (sender, eventInfo) =>
+            {
+                gameEngine.MovePlayerDown();
+            };
+
+            keyboard.OnActionPressed += (sender, eventInfo) =>
+            {
+                gameEngine.PlayerShoot();
+            };
+
+            keyboard.OnEscapePressed += (sender, eventInfo) =>
+            {
+                gameEngine.Break();
+            };
+
+            GameProgram.Initialize(gameEngine);
+
             while (IN_LOOP)
             {
                 int choice = ChooseFromMenu();
@@ -99,44 +136,8 @@ namespace Game
                 {
                     case 0:
                         {
-                            // To be done in a method
                             Console.Clear();
-                            Random randomGenerator = new Random();
-                            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
-
-                            Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
-
-                            keyboard.OnLeftPressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.MovePlayerLeft();
-                            };
-
-                            keyboard.OnRightPressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.MovePlayerRight();
-                            };
-
-                            keyboard.OnUpPressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.MovePlayerUp();
-                            };
-
-                            keyboard.OnDownPressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.MovePlayerDown();
-                            };
-
-                            keyboard.OnActionPressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.PlayerShoot();
-                            };
-
-                            keyboard.OnEscapePressed += (sender, eventInfo) =>
-                            {
-                                gameEngine.Break();
-                            };
-
-                            GameProgram.Initialize(gameEngine);
+                            gameEngine.inLoop = true;
                             gameEngine.Run();
                         }
                         break;

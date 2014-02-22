@@ -2,7 +2,7 @@
 {
     using System;
     public class KeyboardInterface: IUserInterface
-    {
+    {   
         public void ProcessInput()
         {
             while (Console.KeyAvailable)

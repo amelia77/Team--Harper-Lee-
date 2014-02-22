@@ -38,10 +38,7 @@
             IConsoleRenderer renderer = new ConsoleRenderer(GameProgram.WORLD_ROWS, GameProgram.WORLD_COLS);
             IUserInterface keyboard = new KeyboardInterface();
 
-
             Menu.EnterMenu(renderer, keyboard);
-
-                  
         }
     }
 }
