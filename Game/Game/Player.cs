@@ -72,7 +72,7 @@
         public override bool CanCollideWith(Status otherStatus)
         {
             return otherStatus == Status.Weapon || otherStatus == this.status ||
-                otherStatus == Status.Weapon;
+                otherStatus == Status.Bonus;
         }
 
         public override void RespondToCollision(CollisionData collisionData)

@@ -18,10 +18,10 @@ using System.Collections.Generic;
             this.bottomRight = bottomRight;
         }
 
-        public List<GameUnit> GenerateStaticUnit(List<GameUnit> allUnitsInTheGameSoFar)
+        public List<MovingUnit> GenerateStaticUnit(List<GameUnit> allUnitsInTheGameSoFar)
         {
             
-            List<GameUnit> staticUnits = new List<GameUnit>();
+            List<MovingUnit> staticUnits = new List<MovingUnit>();
             for (int i = 0; i < staticUnitCount; i++)
             {
                 int randomRow = this.randomGenerator.Next(topLeft.Row, bottomRight.Row);

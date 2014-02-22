@@ -109,7 +109,8 @@ using System.Threading;
 
         public virtual void GenerateUnit()
         {
-            List<GameUnit> randomUnit = this.unitGenerator.GenerateStaticUnit(allObjects);
+            List<MovingUnit> randomUnit = this.unitGenerator.GenerateStaticUnit(allObjects);
+            movingObjects.AddRange(randomUnit);
             allObjects.AddRange(randomUnit);
         }
 
