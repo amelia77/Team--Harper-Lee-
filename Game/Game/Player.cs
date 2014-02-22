@@ -22,8 +22,6 @@
         }
 
         public int HealthPoints { get; private set; }
-        public int MoveMaxRow { get; internal set; }
-        public int MoveMaxCol { get; internal set; }
         public Weapon Weapon { get; private set; }
 
         public override char[,] GetImage()
@@ -105,6 +103,17 @@
             {
                 this.currTopLeftCol = 0;
             }
+
+            if (this.currTopLeftCol > GameProgram.WORLD_COLS - this.image.GetLength(1))
+            {
+                this.currTopLeftCol = GameProgram.WORLD_COLS - this.image.GetLength(1);
+            }
+
+            if (this.currTopLeftRow > GameProgram.WORLD_ROWS - this.image.GetLength(0))
+            {
+                this.currTopLeftRow = GameProgram.WORLD_ROWS - this.image.GetLength(0);
+            }
+
             this.TopLeftCoords = new Point(currTopLeftRow, currTopLeftCol);
         }
     }
