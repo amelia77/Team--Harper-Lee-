@@ -22,6 +22,7 @@ using System.Collections.Generic;
         {
             
             List<MovingUnit> staticUnits = new List<MovingUnit>();
+            BonusType type = (BonusType)randomGenerator.Next(1, 4);
             for (int i = 0; i < staticUnitCount; i++)
             {
                 int randomRow = this.randomGenerator.Next(topLeft.Row, bottomRight.Row);
@@ -37,7 +38,7 @@ using System.Collections.Generic;
                     randomCol = this.randomGenerator.Next(topLeft.Col, bottomRight.Col);
                     position = new Point(randomRow, randomCol);
                 }
-                staticUnits.Add(new StaticUnit(BonusType.Health,position, new char[,] { { '@' } }, ConsoleColor.Green));
+                staticUnits.Add(new Bonus(type,position, new char[,] { { '@' } }, ConsoleColor.Green));
             }
             return staticUnits;
         }

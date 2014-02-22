@@ -17,7 +17,7 @@
             currTopLeftRow = topLeft.Row;
             currTopLeftCol = topLeft.Col;
             this.HealthPoints = 100;
-            this.Weapon = new Weapon("weapon", new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2)),
+            this.Weapon = new Weapon("weapon", ShotCoords(),
                 new char[,] { { '*' } }, new Point(-1, 0), 3);
         }
 
@@ -92,11 +92,21 @@
             }
             if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Bonus))
             {
-                StaticUnit bonus = collisionData.hitObjectsCollisionUnits[0] as StaticUnit;
+                Bonus bonus = collisionData.hitObjectsCollisionUnits[0] as Bonus;
                 if (bonus.Type == BonusType.Health)
                 {
                     this.HealthPoints += 10;
                 }
+                else if (bonus.Type == BonusType.MagicWeapon)
+                {
+                    this.Weapon = new MagicTool(ShotCoords(), new Point(-1, 0), 100);
+                }
+                else if (bonus.Type == BonusType.CommonWeapon)
+                {
+                    this.Weapon = new Weapon("weapon", ShotCoords(),
+                new char[,] { { '*' } }, new Point(-1, 0), 3);
+                }
+                
             }
         }
 
@@ -123,6 +133,11 @@
             }
 
             this.TopLeftCoords = new Point(currTopLeftRow, currTopLeftCol);
+        }
+
+        private Point ShotCoords()
+        {
+            return new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2));
         }
     }
 }
