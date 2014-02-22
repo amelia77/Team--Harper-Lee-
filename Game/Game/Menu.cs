@@ -3,19 +3,24 @@ using System.Threading;
 
 namespace Game
 {
-    public static class Menu
+    public class Menu
     {
         private static int choice;
         private static int x = GameProgram.WORLD_COLS / 2 - 11;
         private static int y = GameProgram.WORLD_ROWS / 3;
 
-        private static string[] menu = new string[]
+        private static string[] menuRows = new string[]
         {
             "Start Game",
             "Continue Game",
             "Level",
             "Exit"
         };
+
+       /* public Menu(string[] _menu)
+        {
+            menuRows = _menu;
+        }*/
 
         private static int ChooseFromMenu(IConsoleRenderer renderer)
         {
@@ -33,13 +38,13 @@ namespace Game
                         }
                         else
                         {
-                            choice = menu.Length - 1;
+                            choice = menuRows.Length - 1;
                         }
                     }
 
                     else if (pressedKey.Key == ConsoleKey.DownArrow)
                     {
-                        if (choice < menu.Length - 1)
+                        if (choice < menuRows.Length - 1)
                         {
                             choice++;
                         }
@@ -62,23 +67,46 @@ namespace Game
 
                 renderer.ClearScreen();
 
-                for (int i = 0, rowSpace = 0; i < menu.Length; i++, rowSpace += 3)
+                for (int i = 0, rowSpace = 0; i < menuRows.Length; i++, rowSpace += 3)
                 {
                     if (i == choice)
                     {
-                        renderer.DrawTextBoxTopLeft(menu[i], x + i * (x / 3) - 1, y + rowSpace - 2, ConsoleColor.White);
+                        renderer.DrawTextBoxTopLeft(menuRows[i], x + i * (x / 3) - 1, y + rowSpace - 2, ConsoleColor.White);
                     }
                     else
                     {
-                        renderer.WriteOnPosition(menu[i], x + i * (x / 3), y + rowSpace - 1);
+                        renderer.WriteOnPosition(menuRows[i], x + i * (x / 3), y + rowSpace - 1);
                     }
                 }
 
                 Thread.Sleep(150);
             }
         }
-        
 
+        public static void ChooseLevel(IConsoleRenderer renderer, IUserInterface keyboard)
+        {
+            bool in_loop = true;
+            int choice = 0;
+
+            while (in_loop)
+            {
+                renderer.ClearScreen();
+                renderer.DrawTextBoxTopLeft("Enter level between 1 and 3", GameProgram.WORLD_COLS / 2 - 15, GameProgram.WORLD_ROWS / 2 - 7);
+
+                renderer.DrawTextBoxTopLeft("            ", GameProgram.WORLD_COLS / 2 - 7, GameProgram.WORLD_ROWS / 2 - 2);
+
+                string choiceStr = keyboard.EnterText(GameProgram.WORLD_COLS / 2 - 5, GameProgram.WORLD_ROWS / 2 - 1);
+                in_loop = !int.TryParse(choiceStr, out choice);
+
+                if (choice < 1 || choice > 3)
+                {
+                    in_loop = true;
+                }
+
+                Thread.Sleep(150);
+            }
+        }
+        
         public static void EnterMenu(IConsoleRenderer renderer, IUserInterface keyboard)
         {
             bool IN_LOOP = true;
@@ -134,10 +162,14 @@ namespace Game
                         }
                         break;
 
-                    //case 1:
-                      //  {
-                        //    Console.Clear();
-                        //}
+                    /*case 1:
+                        {
+                            Console.Clear();
+                        }*/
+
+                    case 2:
+                        ChooseLevel(renderer, keyboard);
+                        break;
 
                     case 3:
                         IN_LOOP = false;

@@ -14,6 +14,9 @@
         event EventHandler OnActionPressed;
 
         event EventHandler OnEscapePressed;
+        
         void ProcessInput();
+
+        string EnterText(int x, int y); 
     }
 }

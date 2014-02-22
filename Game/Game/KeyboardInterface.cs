@@ -58,6 +58,12 @@
             }
         }
 
+        public string EnterText(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            return Console.ReadLine();
+        }
+
         public event EventHandler OnLeftPressed;
 
         public event EventHandler OnRightPressed;
