@@ -81,5 +81,10 @@
                 base.Move();
             }
         }
+
+        public Weapon Clone()
+        {
+            return new Weapon(this.name, this.TopLeftCoords, this.image, this.Speed, this.Damage, ConsoleColor.Magenta);
+        }
     }
 }

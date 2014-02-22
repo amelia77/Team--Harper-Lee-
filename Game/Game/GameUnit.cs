@@ -24,7 +24,7 @@
             {
                 return new Point(this.topLeftCoords.Row, this.topLeftCoords.Col);
             }
-            protected set
+            internal set
             {
                 this.topLeftCoords = new Point(value.Row, value.Col);
             }

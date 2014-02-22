@@ -1,16 +1,14 @@
 ﻿namespace Game
 {
     using System;
+    using System.Collections.Generic;
 
     public class Player : MovingUnit, ICollidable, IMovable
     {
         public Status status = Status.Player;
 
-        public int HealthPoints { get; set; }
         private int currTopLeftRow;
-        private int currTopLeftCol;
-        public int MoveMaxRow { get; set; }
-        public int MoveMaxCol { get; set; }
+        private int currTopLeftCol; 
 
         public Player(Point topLeft, char[,] image, Point speed,ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed)
@@ -19,7 +17,14 @@
             currTopLeftRow = topLeft.Row;
             currTopLeftCol = topLeft.Col;
             this.HealthPoints = 100;
+            this.Weapon = new Weapon("weapon", new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2)),
+                new char[,] { { '*' } }, new Point(-1, 0), 3);
         }
+
+        public int HealthPoints { get; private set; }
+        public int MoveMaxRow { get; internal set; }
+        public int MoveMaxCol { get; internal set; }
+        public Weapon Weapon { get; private set; }
 
         public override char[,] GetImage()
         {
@@ -57,9 +62,8 @@
 
         public MovingUnit Shoot()
         {
-            MovingUnit weapon = new Weapon("weapon", new Point(this.currTopLeftRow, ((2*this.currTopLeftCol + this.GetImage().GetLength(1)) / 2)),
-                new char[,] { { '*' } }, new Point(-1, 0), 3); // Create a common weapon
-            return weapon;
+            this.Weapon.TopLeftCoords = new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2));
+            return this.Weapon.Clone();
         }
 
         public override Status GetStatus()
