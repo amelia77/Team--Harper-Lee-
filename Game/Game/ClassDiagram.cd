@@ -25,28 +25,29 @@
   <Class Name="Game.Enemy" Collapsed="true">
     <Position X="4.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BACAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AASAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Enemy.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Game.Engine" Collapsed="true">
     <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAFAAAAEAAAAAAAAAAAAAVggAAAkBAwwAAACEgAI=</HashCode>
+      <HashCode>AAAAAFAAAAEAAAAAAAAEAAAAVggAAAkBAwwAAACEgBI=</HashCode>
       <FileName>Engine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game.GameProgram" Collapsed="true">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAECAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAABAAAABA=</HashCode>
       <FileName>GameProgram.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Game.GameUnit" Collapsed="true">
     <Position X="5.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>JACAIAAAIJAAAAAQAAAAAgAQEAAAAAQAAIAggACAAAA=</HashCode>
+      <HashCode>IACAIAAAIJAAAAAQAAAAAgAUEAAAAAAAAIAggACAAAA=</HashCode>
       <FileName>GameUnit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -68,7 +69,7 @@
   <Class Name="Game.KeyboardInterface" Collapsed="true">
     <Position X="0.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAQAEAAEAAAAAAgAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAQAEAAEAAAAAAgAgAAAAAAAAAACAA=</HashCode>
       <FileName>KeyboardInterface.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -79,11 +80,12 @@
       <HashCode>AAAAAAAAAIAAACAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MovingUnit.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Game.Player" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="6.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BCGAAAAAQIAABAAAAAAAAAAQABAICAQIQAAAAAAAAAA=</HashCode>
+      <HashCode>ACWAAAAAQIAABAAAAAAAAAAUABAICAAIQAAAAAAAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -112,7 +114,7 @@
   <Class Name="Game.Weapon" Collapsed="true">
     <Position X="2.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BACAAACAAIAAgAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>ACSAAACAAIAAgAAAAAAAAAAEAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Weapon.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -120,7 +122,7 @@
   <Interface Name="Game.ICollidable" Collapsed="true">
     <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <HashCode>AACAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>ICollidable.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -155,7 +157,7 @@
   <Interface Name="Game.IUserInterface" Collapsed="true">
     <Position X="10.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAQAEAAEAAAAAAgAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAQAEAAEAAAAAAgAgAAAAAAAAAACAA=</HashCode>
       <FileName>IUserInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>

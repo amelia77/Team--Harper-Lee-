@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Player : GameUnit, ICollidable
+    public class Player : MovingUnit, ICollidable, IMovable
     {
         public Status status = Status.Player;
 
@@ -12,8 +12,8 @@
         public int MoveMaxRow { get; set; }
         public int MoveMaxCol { get; set; }
 
-        public Player(Point topLeft, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
-            : base(topLeft, image, color)
+        public Player(Point topLeft, char[,] image, Point speed,ConsoleColor color = ConsoleColor.Magenta)
+            : base(topLeft, image, speed)
         {
             this.image = image;
             currTopLeftRow = topLeft.Row;

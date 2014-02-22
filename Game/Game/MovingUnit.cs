@@ -2,7 +2,7 @@
 using System;
 namespace Game
 {
-    public class MovingUnit: GameUnit
+    public class MovingUnit: GameUnit, IMovable
     {
         public Point Speed { get; set; } // Moving coordinates
 

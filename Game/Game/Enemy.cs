@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Game
 {
-    public class Enemy : MovingUnit
+    public class Enemy : MovingUnit, ICollidable, IMovable
     {
         public Status status = Status.Enemy;
 

@@ -12,7 +12,7 @@
         {
             char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
 
-            Player player = new Player(new Point(20, 10), hero, ConsoleColor.Yellow);
+            Player player = new Player(new Point(20, 10), hero,new Point (0,0), ConsoleColor.Yellow);
             player.MoveMaxRow = 0;
             player.MoveMaxCol = 0;
 
