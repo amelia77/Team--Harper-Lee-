@@ -4,7 +4,7 @@ namespace Game
 {
     public class MovingUnit: GameUnit
     {
-        public Point Speed { get; protected set; } // Moving coordinates
+        public Point Speed { get; set; } // Moving coordinates
 
         public MovingUnit(Point topLeft, char[,] body, Point speed, ConsoleColor color=ConsoleColor.White)
             : base(topLeft, body, color)

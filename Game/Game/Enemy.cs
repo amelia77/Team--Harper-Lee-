@@ -24,11 +24,11 @@ namespace Game
         {
             if (collisionData.CollisionForceDirection.Row * this.Speed.Row < 0)
             {
-                this.Speed.Row = 1;
+                this.Speed = new Point(1, this.Speed.Col);
             }
             if (collisionData.CollisionForceDirection.Col * this.Speed.Col < 0)
             {
-                this.Speed.Col = 0;
+                this.Speed = new Point(this.Speed.Row, 0);
             }
             if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
             {
@@ -45,11 +45,11 @@ namespace Game
         {
             if (this.topLeftCoords.Row < 1)
             {
-                this.Speed.Row = 1;
+                this.Speed = new Point(1, this.Speed.Col);
             }
             if (this.topLeftCoords.Col < 1)
             {
-                this.Speed.Col = 0;
+                this.Speed = new Point(this.Speed.Row, 0);
             }
             this.UpdatePosition();
         }

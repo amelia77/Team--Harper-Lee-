@@ -1,11 +1,12 @@
 ﻿namespace Game
 {
-    public class  Point
+    public struct Point
     {
         public int Row { get; set; }
         public int Col { get; set; }
 
-        public Point(int row, int col)
+        public Point(int row, int col) 
+            : this()
         {
             this.Row = row;
             this.Col = col;
@@ -23,7 +24,7 @@
 
         public override bool Equals(object obj) // So two point can be compared
         {
-            Point objAsMatrixCoords = obj as Point;
+            Point objAsMatrixCoords = (Point)obj;
 
             return objAsMatrixCoords.Row == this.Row && objAsMatrixCoords.Col == this.Col;
         }

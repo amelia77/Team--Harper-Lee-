@@ -47,7 +47,7 @@ using System.Threading;
         {
             //first remove old player from the list
             this.player = obj as Player;
-            GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords() == player.GetTopLeftCoords());
+            GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords().Equals(player.GetTopLeftCoords()));
             allObjects.Remove(foundUnit);
 
             this.player = obj as Player; //add the new player
