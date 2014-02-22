@@ -26,8 +26,9 @@
                     movingCollisionForceDirection.Row = -movingObject.Speed.Row;
                     staticObjects[verticalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
+                    
                 }
 
                 if (horizontalIndex != -1)
@@ -35,7 +36,7 @@
                     movingCollisionForceDirection.Col = -movingObject.Speed.Col;
                     staticObjects[horizontalIndex].RespondToCollision(
                         new CollisionData(new Point(0, movingObject.Speed.Col),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
                 }
 
@@ -50,33 +51,37 @@
 
                         staticObjects[diagonalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
                     }
                 }
 
                 List<Status> hitByMovingCollisionGroups = new List<Status>();
+                List<GameUnit> hitByMovingCollisionGroupsObj = new List<GameUnit>();
 
                 if (verticalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(staticObjects[verticalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(staticObjects[verticalIndex]);
                 }
 
                 if (horizontalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(staticObjects[horizontalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(staticObjects[horizontalIndex]);
                 }
 
                 if (diagonalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(staticObjects[diagonalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(staticObjects[diagonalIndex]);
                 }
 
                 if (verticalIndex != -1 || horizontalIndex != -1 || diagonalIndex != -1)
                 {
                     movingObject.RespondToCollision(
                         new CollisionData(movingCollisionForceDirection,
-                            hitByMovingCollisionGroups)
+                            hitByMovingCollisionGroups, hitByMovingCollisionGroupsObj)
                             );
                 }
             }
@@ -186,7 +191,7 @@
                     movingCollisionForceDirection.Row = -movingObject.Speed.Row;
                     movingObjects[verticalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
                 }
 
@@ -195,7 +200,7 @@
                     movingCollisionForceDirection.Col = -movingObject.Speed.Col;
                     movingObjects[horizontalIndex].RespondToCollision(
                         new CollisionData(new Point(0, movingObject.Speed.Col),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
                 }
 
@@ -211,33 +216,37 @@
 
                         movingObjects[diagonalIndex].RespondToCollision(
                         new CollisionData(new Point(movingObject.Speed.Row, 0),
-                            movingObject.GetStatus())
+                            movingObject.GetStatus(), movingObject)
                             );
                     }
                 }
 
                 List<Status> hitByMovingCollisionGroups = new List<Status>();
+                List<GameUnit> hitByMovingCollisionGroupsObj = new List<GameUnit>();
 
                 if (verticalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(movingObjects[verticalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(movingObjects[verticalIndex]);
                 }
 
                 if (horizontalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(movingObjects[horizontalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(movingObjects[horizontalIndex]);
                 }
 
                 if (diagonalIndex != -1)
                 {
                     hitByMovingCollisionGroups.Add(movingObjects[diagonalIndex].GetStatus());
+                    hitByMovingCollisionGroupsObj.Add(movingObjects[diagonalIndex]);
                 }
 
                 if (verticalIndex != -1 || horizontalIndex != -1 || diagonalIndex != -1)
                 {
                     movingObject.RespondToCollision(
                         new CollisionData(movingCollisionForceDirection,
-                            hitByMovingCollisionGroups)
+                            hitByMovingCollisionGroups, hitByMovingCollisionGroupsObj)
                             );
                 }
             }

@@ -90,6 +90,14 @@
             {
                 this.HealthPoints -= 10;
             }
+            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Bonus))
+            {
+                StaticUnit bonus = collisionData.hitObjectsCollisionUnits[0] as StaticUnit;
+                if (bonus.Type == BonusType.Health)
+                {
+                    this.HealthPoints += 10;
+                }
+            }
         }
 
         public override void Move()

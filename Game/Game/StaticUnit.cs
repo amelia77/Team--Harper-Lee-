@@ -12,11 +12,14 @@ namespace Game
     }
     public class StaticUnit : MovingUnit
     {
-        public StaticUnit(Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
+
+        public StaticUnit(BonusType type, Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeftCoords, image, new Point(0,0), color)
         {
-
+            this.Type = type;
         }
+
+        public BonusType Type { get; set; }
 
         public override Status GetStatus()
         {
