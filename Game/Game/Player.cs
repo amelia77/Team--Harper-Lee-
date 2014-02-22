@@ -57,7 +57,7 @@
 
         public MovingUnit Shoot()
         {
-            MovingUnit weapon = new Weapon(new Point(this.currTopLeftRow - 1, this.currTopLeftCol + (this.currTopLeftCol / 2) - 1),
+            MovingUnit weapon = new Weapon("weapon", new Point(this.currTopLeftRow, ((2*this.currTopLeftCol + this.GetImage().GetLength(1)) / 2)),
                 new char[,] { { '*' } }, new Point(-1, 0), 3); // Create a common weapon
             return weapon;
         }

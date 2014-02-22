@@ -3,12 +3,13 @@
     using System;
     public class Weapon : MovingUnit, IMovable, IWeapon, ICollidable
     {
+        private string name;
         private int damage;
         private int ammo;
 
         public Status status = Status.Weapon;
 
-        public Weapon(Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
+        public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
         {
             this.Damage = damage;
