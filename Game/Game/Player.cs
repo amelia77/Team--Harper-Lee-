@@ -109,9 +109,9 @@
                 this.currTopLeftCol = GameProgram.WORLD_COLS - this.image.GetLength(1);
             }
 
-            if (this.currTopLeftRow > GameProgram.WORLD_ROWS - this.image.GetLength(0))
+            if (this.currTopLeftRow > GameProgram.WORLD_ROWS - this.image.GetLength(0) - 1)
             {
-                this.currTopLeftRow = GameProgram.WORLD_ROWS - this.image.GetLength(0);
+                this.currTopLeftRow = GameProgram.WORLD_ROWS - this.image.GetLength(0) - 1;
             }
 
             this.TopLeftCoords = new Point(currTopLeftRow, currTopLeftCol);
