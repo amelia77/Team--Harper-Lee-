@@ -135,8 +135,10 @@
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
+            
             while (inLoop)
             {
+                
                 this.userInterface.ProcessInput(); // process event from the console
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
                 {
@@ -145,11 +147,8 @@
                     this.stopWatch.Restart();
                 }
                 
-                
                 //Print health points of the player
-                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints)+"%", new Point(1, 0), 5+player.HealthPoints);
-                this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10), 
-                    new Point(1, 9), 10, ConsoleColor.Red, ConsoleColor.White);
+                PrintCurrentStatus();
 
                 //Print all game units and move them if necessary
                 foreach (var obj in this.allObjects)
@@ -163,6 +162,8 @@
 
                 //collect all destroyed objects
                 List<GameUnit> destroyedObjects = allObjects.FindAll(obj => obj.IsDestroyed);
+                var destroyedEnemies = destroyedObjects.FindAll(obj => obj.GetType().Name == "Enemy");
+                this.player.Score += 100 * destroyedEnemies.Count;
 
                 this.allObjects.RemoveAll(obj => obj.IsDestroyed);
                 this.movingObjects.RemoveAll(obj => obj.IsDestroyed);
@@ -177,6 +178,16 @@
         public void Initialize(Level lvl)
         { 
             
+        }
+
+        private void PrintCurrentStatus()
+        {
+            this.renderer.WriteOnPosition("HP: " + (player.HealthPoints) + "%", new Point(1, 1), 5 + player.HealthPoints);
+            this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10),
+                new Point(1, 10), 10, ConsoleColor.Red, ConsoleColor.White);
+            this.renderer.WriteOnPosition("Inventory: " + this.player.Weapon.Name, new Point(1, 21), 20, ConsoleColor.White);
+
+            this.renderer.WriteOnPosition("Score: " + this.player.Score, new Point(1, 47), 20, ConsoleColor.Yellow);
         }
     }
 }

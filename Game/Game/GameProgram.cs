@@ -16,7 +16,7 @@
 
             engine.AddPlayer(player);
 
-            char[,] cat = ImageProducer.GetImage(@"..\..\images\cat.txt");
+            char[,] cat = ImageProducer.GetImage(@"..\..\images\bunny.txt");
             for (int i = 0; i < 5; i++)
             {
                 Enemy enemy = new Enemy(new Point(5, 10*(i+1)), cat, new Point(0, -1),

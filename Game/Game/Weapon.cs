@@ -3,6 +3,7 @@
     using System;
     public class Weapon : MovingUnit, IMovable, IWeapon, ICollidable
     {
+        private const int MinRow = 3;
         private string name;
         private int damage;
         private int ammo;
@@ -12,8 +13,25 @@
         public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
         {
+            this.Name = name;
             this.Damage = damage;
             this.Ammo = ammo;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Incorrect name!");
+                }
+                this.name = value;
+            }
         }
 
         public int Damage
@@ -72,7 +90,7 @@
 
         public override void Move()
         {
-            if (this.topLeftCoords.Row <= 0)
+            if (this.topLeftCoords.Row <= MinRow)
             {
                 this.isDestroyed = true;
             }

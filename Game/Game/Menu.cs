@@ -114,6 +114,7 @@ namespace Game
             Random randomGenerator = new Random();
             GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
 
+
             Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
 
             keyboard.OnLeftPressed += (sender, eventInfo) =>
@@ -139,13 +140,15 @@ namespace Game
             keyboard.OnActionPressed += (sender, eventInfo) =>
             {
                 gameEngine.PlayerShoot();
+                //Sounds.SFX(Sounds.SoundEffects.Shoot);
             };
 
             keyboard.OnEscapePressed += (sender, eventInfo) =>
             {
                 gameEngine.Break();
+                Sounds.SFX(Sounds.SoundEffects.GameOver);
             };
-
+            
             GameProgram.Initialize(gameEngine);
 
             while (IN_LOOP)

@@ -6,6 +6,7 @@
     public class Player : MovingUnit, ICollidable, IMovable
     {
         public UnitStatus status = UnitStatus.Player;
+        private const int MinRow = 3;
 
         private int currTopLeftRow;
         private int currTopLeftCol; 
@@ -17,11 +18,13 @@
             currTopLeftRow = topLeft.Row;
             currTopLeftCol = topLeft.Col;
             this.HealthPoints = 100;
-            this.Weapon = new Weapon("weapon", ShotCoords(),
+            this.Weapon = new Weapon("Common weapon", ShotCoords(),
                 new char[,] { { '*' } }, new Point(-1, 0), 3);
         }
 
         public int HealthPoints { get; private set; }
+
+        public int Score { get; set; }
         public Weapon Weapon { get; private set; }
 
         public override char[,] GetImage()
@@ -110,9 +113,9 @@
 
         public override void Move()
         {
-            if (this.currTopLeftRow < 0)
+            if (this.currTopLeftRow < MinRow)
             {
-                this.currTopLeftRow = 0;
+                this.currTopLeftRow = MinRow + 1;
             }
 
             if (this.currTopLeftCol < 0)

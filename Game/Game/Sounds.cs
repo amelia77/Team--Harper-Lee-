@@ -1,20 +1,90 @@
 ﻿namespace Game
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Media;
+    using System.Security;
     using System.Threading;
+
     public static class Sounds
     {
         public enum SoundEffects { Move, Shoot, EnemyIsDestroyed, BossIsDestroyed, RecieveBonus, GameOver }
         static int[,] musicSheet;
+        const string path = @"..\..\music\";
+        public static Thread musicThread;
+        static bool musicOn = true;
+        static bool sfxOn = true;
+        static bool musicAvalible = true;
+
+        static Sounds() // A static constructor to load the game music when the method class is first used
+        {
+            try
+            {
+                musicThread = new Thread(new ThreadStart(PlayMusic));
+                if (musicOn)
+                {
+                    StartMusic();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        internal static void PlayMusic()
+        {
+            SFX(SoundEffects.Move);
+        }
+        public static bool SfxON
+        {
+            get
+            {
+                return sfxOn;
+            }
+            set
+            {
+                if (value && !sfxOn)
+                {
+                    sfxOn = true;
+                }
+
+                if (!value && sfxOn)
+                {
+                    sfxOn = false;
+                }
+            }
+        }
+        public static bool MusicOn
+        {
+            get
+            {
+                return musicOn;
+            }
+            set
+            {
+                if (value && !musicOn && musicAvalible)
+                {
+                    StartMusic();
+                    musicOn = true;
+                }
+
+                if (!value && musicOn && musicAvalible)
+                {
+                    StopMusic();
+                    musicOn = false;
+                }
+            }
+        }
 
         public static void SFX(SoundEffects sfx)
         {
             switch (sfx)
             {
                 case SoundEffects.Move:
-                    PlaySoundFromFile(@"..\..\music\Game-music.wav");
+                    PlaySoundFromFile(@"..\..\music\music.wav");
                     break;
                 case SoundEffects.GameOver:
                     PlaySoundFromFile(@"..\..\music\Death.wav");
@@ -24,63 +94,30 @@
                     break;
             } 
         }
-
-        private static void PlaySoundFromFile(string filePath)
+        internal static void PlaySoundFromFile(string filePath)
         {
             using (SoundPlayer player = new SoundPlayer(filePath))
             {
-                player.Play();
-            }
-        }
-
-        public static void Music()
-        {
-            if (File.Exists(@"..\..\music.mus"))
-            {
-                StreamReader musicFile = new StreamReader(@"..\..\music.mus");
-                LoadMusicFromFile(musicFile);
-            }
-            else if (File.Exists(@"music.mus"))
-            {
-                StreamReader musicFile = new StreamReader(@"music.mus");
-                LoadMusicFromFile(musicFile);
-            }
-            else
-            {
-                throw new FileNotFoundException();
-            }
-            new Thread(() => SomeMusic()).Start();
-        }
-
-        static void LoadMusicFromFile(StreamReader loadMusic)
-        {
-            int lines = int.Parse(loadMusic.ReadLine());
-            musicSheet = new int[lines, 2];
-            for (int i = 0; i < lines; i++)
-            {
-                string[] musicLine = loadMusic.ReadLine().Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                musicSheet[i, 0] = int.Parse(musicLine[0]);
-                musicSheet[i, 1] = int.Parse(musicLine[1]);
-            }
-        }
-
-        public static void SomeMusic()
-        {
-            while (true)
-            {
-                for (int line = 0; line < musicSheet.GetLength(0); line++)
+                try
                 {
-                    if (musicSheet[line, 1] != 0)
-                    {
-                        Console.Beep(musicSheet[line, 0], musicSheet[line, 1]);
-                    }
-                    else
-                    {
-                        Thread.Sleep(musicSheet[line, 0]);
-                    }
+                    player.Stop();
+                    player.PlayLooping();
+
+                }
+                finally
+                {
+                    Sounds.SfxON = false;
                 }
             }
         }
-    
+        internal static void StopMusic()
+        {
+            musicThread.Abort();
+            musicThread = new Thread(new ThreadStart(PlayMusic));
+        }
+        internal static void StartMusic()
+        {
+            musicThread.Start();
+        }
     }
 }
