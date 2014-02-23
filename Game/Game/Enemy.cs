@@ -3,19 +3,19 @@ namespace Game
 {
     public class Enemy : MovingUnit, ICollidable, IMovable
     {
-        public Status status = Status.Enemy;
+        public UnitStatus status = UnitStatus.Enemy;
 
         public Enemy(Point topLeft, char[,] image, Point speed, ConsoleColor color)
             : base(topLeft, image, speed, color)
         {
         }
 
-        public override bool CanCollideWith(Status otherStatus)
+        public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == Status.Player || otherStatus == Status.Enemy;
+            return otherStatus == UnitStatus.Player || otherStatus == UnitStatus.Enemy;
         }
 
-        public override Status GetStatus()
+        public override UnitStatus GetStatus()
         {
             return this.status;
         }
@@ -30,7 +30,7 @@ namespace Game
             {
                 this.Speed = new Point(this.Speed.Row, 0);
             }
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
+            if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Enemy))
             {
                 //this.Speed.Row = 1;
                 //this.Speed.Col = 0;

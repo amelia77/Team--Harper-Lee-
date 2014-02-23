@@ -1,4 +1,4 @@
-﻿public enum Status
+﻿public enum UnitStatus
 {
     EmptyUnit = 0,
     Player = 1,

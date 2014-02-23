@@ -7,7 +7,7 @@
         private int damage;
         private int ammo;
 
-        public Status status = Status.Weapon;
+        public UnitStatus status = UnitStatus.Weapon;
 
         public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
@@ -48,14 +48,14 @@
             }
         }
 
-        public override Status GetStatus()
+        public override UnitStatus GetStatus()
         {
             return this.status;
         }
 
-        public override bool CanCollideWith(Status otherStatus)
+        public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == Status.Enemy || otherStatus == Status.Player;
+            return otherStatus == UnitStatus.Enemy || otherStatus == UnitStatus.Player;
         }
 
         public override void RespondToCollision(CollisionData collisionData)

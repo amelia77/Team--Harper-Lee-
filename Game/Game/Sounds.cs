@@ -6,7 +6,7 @@
     using System.Threading;
     public static class Sounds
     {
-        public enum SoundEffects { Move, EnemyIsDestroyed, BossIsDestroyed, RecieveBonus, GameOver }
+        public enum SoundEffects { Move, Shoot, EnemyIsDestroyed, BossIsDestroyed, RecieveBonus, GameOver }
         static int[,] musicSheet;
 
         public static void SFX(SoundEffects sfx)
@@ -14,7 +14,13 @@
             switch (sfx)
             {
                 case SoundEffects.Move:
-                    PlaySoundFromFile(@"..\..\music\music.wav");
+                    PlaySoundFromFile(@"..\..\music\Game-music.wav");
+                    break;
+                case SoundEffects.GameOver:
+                    PlaySoundFromFile(@"..\..\music\Death.wav");
+                    break;
+                case SoundEffects.Shoot:
+                    PlaySoundFromFile(@"..\..\music\Shoot.wav");
                     break;
             } 
         }

@@ -102,14 +102,14 @@
         }
 
 
-        public virtual bool CanCollideWith(Status otherStatus)
+        public virtual bool CanCollideWith(UnitStatus otherStatus)
         {
             return false;
         }
 
-        public virtual Status GetStatus()
+        public virtual UnitStatus GetStatus()
         {
-            return Status.EmptyUnit;
+            return UnitStatus.EmptyUnit;
         }
     }
 }

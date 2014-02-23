@@ -5,7 +5,7 @@
 
     public class Player : MovingUnit, ICollidable, IMovable
     {
-        public Status status = Status.Player;
+        public UnitStatus status = UnitStatus.Player;
 
         private int currTopLeftRow;
         private int currTopLeftCol; 
@@ -64,31 +64,31 @@
             return this.Weapon.Clone();
         }
 
-        public override Status GetStatus()
+        public override UnitStatus GetStatus()
         {
-            return Status.Player;
+            return UnitStatus.Player;
         }
 
-        public override bool CanCollideWith(Status otherStatus)
+        public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == Status.Weapon || otherStatus == this.status ||
-                otherStatus == Status.Bonus;
+            return otherStatus == UnitStatus.Weapon || otherStatus == this.status ||
+                otherStatus == UnitStatus.Bonus;
         }
 
         public override void RespondToCollision(CollisionData collisionData)
         {
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
+            if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Enemy))
             {
                 this.HealthPoints -= 10 * collisionData.hitObjectsCollisionUnits.Count;
 
             }
 
-            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Weapon))
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Weapon))
             {
                 this.HealthPoints -= (collisionData.hitObjectsCollisionUnits[0] as Weapon).Damage;
 
             }
-            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Bonus))
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Bonus))
             {
                 Bonus bonus = collisionData.hitObjectsCollisionUnits[0] as Bonus;
                 if (bonus.Type == BonusType.Health)

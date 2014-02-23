@@ -56,7 +56,7 @@
                     }
                 }
 
-                List<Status> hitByMovingCollisionGroups = new List<Status>();
+                List<UnitStatus> hitByMovingCollisionGroups = new List<UnitStatus>();
                 List<GameUnit> hitByMovingCollisionGroupsObj = new List<GameUnit>();
 
                 if (verticalIndex != -1)
@@ -221,7 +221,7 @@
                     }
                 }
 
-                List<Status> hitByMovingCollisionGroups = new List<Status>();
+                List<UnitStatus> hitByMovingCollisionGroups = new List<UnitStatus>();
                 List<GameUnit> hitByMovingCollisionGroupsObj = new List<GameUnit>();
 
                 if (verticalIndex != -1)

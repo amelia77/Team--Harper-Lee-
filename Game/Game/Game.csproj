@@ -83,7 +83,7 @@
     <Compile Include="GameUnit.cs" />
     <Compile Include="Sounds.cs" />
     <Compile Include="Bonus.cs" />
-    <Compile Include="Status.cs" />
+    <Compile Include="UnitStatus.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,7 +93,14 @@
   <ItemGroup>
     <Content Include="images\hero.txt" />
     <Content Include="images\pacman.txt" />
+    <Content Include="music\Bonus.wav" />
+    <Content Include="music\Death.wav" />
+    <Content Include="music\Game-music.wav" />
     <Content Include="music\music.wav" />
+    <Content Include="music\Shoot.wav" />
+    <Content Include="music\Shoot2.wav" />
+    <Content Include="music\Shoot3.wav" />
+    <Content Include="music\Walking.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

@@ -23,14 +23,14 @@ namespace Game
 
         public BonusType Type { get; set; }
 
-        public override Status GetStatus()
+        public override UnitStatus GetStatus()
         {
-            return Status.Bonus;
+            return UnitStatus.Bonus;
         }
 
-        public override bool CanCollideWith(Status otherStatus)
+        public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == Status.Player;
+            return otherStatus == UnitStatus.Player;
         }
 
         public override void RespondToCollision(CollisionData collisionData)

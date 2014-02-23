@@ -3,12 +3,12 @@ namespace Game
 {
     public interface ICollidable
     {
-        bool CanCollideWith(Status objectStatus);
+        bool CanCollideWith(UnitStatus objectStatus);
 
         List<Point> GetCollisionProfile();
 
         void RespondToCollision(CollisionData collisionData);
 
-        Status GetStatus();
+        UnitStatus GetStatus();
     }
 }
