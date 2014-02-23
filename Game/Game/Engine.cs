@@ -1,10 +1,12 @@
 ﻿namespace Game
 {
     using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
-   public class Engine
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading;
+    using Game.Levels;
+    
+    public class Engine
     {
         private const long ElapsedTicks = 10000;
         private IConsoleRenderer renderer; // Console printer
@@ -154,7 +156,7 @@ using System.Threading;
             }
         }
 
-        public void Reset()
+        public void Initialize(Level lvl)
         { 
             
         }

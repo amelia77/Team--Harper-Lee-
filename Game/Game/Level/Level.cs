@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.Level
+namespace Game.Levels
 {
-    class Level
+    public class Level
     {
         List<Enemy> enemies;
     }
