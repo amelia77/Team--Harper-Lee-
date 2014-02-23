@@ -147,9 +147,9 @@
                 
                 
                 //Print health points of the player
-                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints)+"%", new Point(1, 0), 8);
+                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints)+"%", new Point(1, 0), 5+player.HealthPoints);
                 this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10), 
-                    new Point(1, 8), 10, ConsoleColor.Red, ConsoleColor.White);
+                    new Point(1, 9), 10, ConsoleColor.Red, ConsoleColor.White);
 
                 //Print all game units and move them if necessary
                 foreach (var obj in this.allObjects)

@@ -48,7 +48,7 @@ using System.Collections.Generic;
                     randomCol = this.randomGenerator.Next(topLeft.Col, bottomRight.Col);
                     position = new Point(randomRow, randomCol);
                 }
-                staticUnits.Add(new Bonus(type,position, new char[,] { { '@' } },speed, ConsoleColor.Green));
+                staticUnits.Add(new Bonus(type,position, new char[,] { { (char) 2}},speed, ConsoleColor.Green));
             }
             return staticUnits;
         }
