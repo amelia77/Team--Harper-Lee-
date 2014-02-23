@@ -53,5 +53,14 @@ namespace Game
             }
             this.UpdatePosition();
         }
+
+        public MovingUnit Shoot()
+        {
+            int topLeftRow = this.TopLeftCoords.Row + this.image.GetLength(0);
+            int topLeftCol = (2 * this.TopLeftCoords.Col + this.GetImage().GetLength(1)) / 2;
+            Point topLeftCoords = new Point(topLeftRow, topLeftCol);
+            return new Weapon("weapon", topLeftCoords, new char[,] { { 'o' } }, new Point(1, 0), 10, ConsoleColor.Blue);
+        }
+
     }
 }

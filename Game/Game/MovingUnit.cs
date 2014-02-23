@@ -2,7 +2,7 @@
 using System;
 namespace Game
 {
-    public class MovingUnit: GameUnit, IMovable
+    public abstract class MovingUnit: GameUnit, IMovable
     {
         public Point Speed { get; set; } // Moving coordinates
 
@@ -21,5 +21,6 @@ namespace Game
         {
             this.UpdatePosition();
         }
+  
     }
 }

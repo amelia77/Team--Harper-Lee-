@@ -77,20 +77,18 @@
 
         public override void RespondToCollision(CollisionData collisionData)
         {
-
-            if (collisionData.CollisionForceDirection.Row * this.currTopLeftRow < 0)
-            {
-                // ....
-            }
-            if (collisionData.CollisionForceDirection.Col * this.currTopLeftCol < 0)
-            {
-                //......
-            }
             if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Enemy))
             {
-                this.HealthPoints -= 10;
+                this.HealthPoints -= 10 * collisionData.hitObjectsCollisionUnits.Count;
+
             }
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Bonus))
+
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Weapon))
+            {
+                this.HealthPoints -= (collisionData.hitObjectsCollisionUnits[0] as Weapon).Damage;
+
+            }
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(Status.Bonus))
             {
                 Bonus bonus = collisionData.hitObjectsCollisionUnits[0] as Bonus;
                 if (bonus.Type == BonusType.Health)

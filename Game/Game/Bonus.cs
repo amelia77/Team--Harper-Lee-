@@ -15,8 +15,8 @@ namespace Game
     public class Bonus : MovingUnit
     {
 
-        public Bonus(BonusType type, Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
-            : base(topLeftCoords, image, new Point(0,0), color)
+        public Bonus(BonusType type, Point topLeftCoords, char[,] image, Point speed, ConsoleColor color = ConsoleColor.Magenta)
+            : base(topLeftCoords, image, speed, color)
         {
             this.Type = type;
         }
@@ -40,7 +40,12 @@ namespace Game
 
         public override void Move()
         {
-            
+            if (this.topLeftCoords.Col < 1)
+            {
+                this.Speed = new Point(this.Speed.Row, this.Speed.Col *(-1));
+            }
+            this.UpdatePosition();
         }
+
     }
 }

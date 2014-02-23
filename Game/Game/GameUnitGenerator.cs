@@ -18,6 +18,15 @@ using System.Collections.Generic;
             this.bottomRight = bottomRight;
         }
 
+        public Random RandomGenerator
+        {
+            get { return this.randomGenerator; }
+            private set
+            {
+                this.randomGenerator = value;
+            }
+        }
+
         public List<MovingUnit> GenerateStaticUnit(List<GameUnit> allUnitsInTheGameSoFar)
         {
             
@@ -29,6 +38,7 @@ using System.Collections.Generic;
                 int randomCol = this.randomGenerator.Next(topLeft.Col, bottomRight.Col);
                 
                 Point position = new Point(randomRow, randomCol);
+                Point speed = new Point(randomGenerator.Next(0, 2), randomGenerator.Next(-1, 2));
 
                 while (IsPointInAGameUnit(position, allUnitsInTheGameSoFar))
                 {
@@ -38,7 +48,7 @@ using System.Collections.Generic;
                     randomCol = this.randomGenerator.Next(topLeft.Col, bottomRight.Col);
                     position = new Point(randomRow, randomCol);
                 }
-                staticUnits.Add(new Bonus(type,position, new char[,] { { '@' } }, ConsoleColor.Green));
+                staticUnits.Add(new Bonus(type,position, new char[,] { { '@' } },speed, ConsoleColor.Green));
             }
             return staticUnits;
         }

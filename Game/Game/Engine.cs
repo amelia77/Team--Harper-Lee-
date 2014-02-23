@@ -84,6 +84,22 @@
             this.allObjects.Add(weapon);
         }
 
+        public virtual void EnemyShoot()
+        {
+            Random generator = this.unitGenerator.RandomGenerator;
+            int randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
+            Enemy currEnemy = this.movingObjects[randomEnemyIndex] as Enemy;
+            
+            while (currEnemy == null)
+            {
+                randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
+                currEnemy = this.movingObjects[randomEnemyIndex] as Enemy;
+            }
+            MovingUnit enemyShot = currEnemy.Shoot();
+            movingObjects.Add(enemyShot);
+            allObjects.Add(enemyShot);
+        }
+
         public virtual void Break()
         {
             inLoop = false;
@@ -125,11 +141,13 @@
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
                 {
                     this.GenerateUnit(); //Generate random unit;
+                    this.EnemyShoot();
                     this.stopWatch.Restart();
                 }
                 
+                
                 //Print health points of the player
-                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints / 10)+"%", new Point(1, 0), 8);
+                this.renderer.WriteOnPosition("HP: " + (player.HealthPoints)+"%", new Point(1, 0), 8);
                 this.renderer.WriteOnPosition(new string('\u2588', player.HealthPoints / 10), 
                     new Point(1, 8), 10, ConsoleColor.Red, ConsoleColor.White);
 
