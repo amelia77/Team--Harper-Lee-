@@ -11,7 +11,8 @@
         private const int MinRow = 3;
 
         private int currTopLeftRow;
-        private int currTopLeftCol; 
+        private int currTopLeftCol;
+        private int healthPoints;
 
         public Player(Point topLeft, char[,] image, Point speed,ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed)
@@ -24,7 +25,21 @@
                 new char[,] { { '*' } }, new Point(-1, 0), 3);
         }
 
-        public int HealthPoints { get; private set; }
+        public int HealthPoints
+        {
+            get
+            {
+                return this.healthPoints;
+            }
+            private set
+            {
+                if (value<=0)
+                {
+                    throw new ArgumentException();
+                }
+                this.healthPoints = value;
+            }
+        }
 
         public int Score { get; set; }
         public Weapon Weapon { get; private set; }

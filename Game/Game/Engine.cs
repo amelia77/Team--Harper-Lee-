@@ -160,19 +160,28 @@
                     obj.Move();
                     this.renderer.ReDraw(obj, false);
                 }
+                try
+                {
+                    CollisionDispatcher.HandleCollisions(this.movingObjects, this.staticObjects); // handle all collisions  
 
-                CollisionDispatcher.HandleCollisions(this.movingObjects, this.staticObjects); // handle all collisions
+                    //collect all destroyed objects
+                    List<GameUnit> destroyedObjects = allObjects.FindAll(obj => obj.IsDestroyed);
+                    var destroyedEnemies = destroyedObjects.FindAll(obj => obj.GetType().Name == "Enemy");
+                    this.player.Score += 100 * destroyedEnemies.Count;
 
-                //collect all destroyed objects
-                List<GameUnit> destroyedObjects = allObjects.FindAll(obj => obj.IsDestroyed);
-                var destroyedEnemies = destroyedObjects.FindAll(obj => obj.GetType().Name == "Enemy");
-                this.player.Score += 100 * destroyedEnemies.Count;
+                    this.allObjects.RemoveAll(obj => obj.IsDestroyed);
+                    this.movingObjects.RemoveAll(obj => obj.IsDestroyed);
+                    this.staticObjects.RemoveAll(obj => obj.IsDestroyed);
 
-                this.allObjects.RemoveAll(obj => obj.IsDestroyed);
-                this.movingObjects.RemoveAll(obj => obj.IsDestroyed);
-                this.staticObjects.RemoveAll(obj => obj.IsDestroyed);
-
-                this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
+                    this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
+                }
+                catch
+                {
+                    // ..............................................
+                    string exceptionMessage = "You are dead";
+                    this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1),
+                        exceptionMessage.Length + 10, ConsoleColor.Red);
+                }
 
                 Thread.Sleep(300);
             }
