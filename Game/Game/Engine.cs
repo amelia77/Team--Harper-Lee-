@@ -8,7 +8,7 @@
     using Game.Interfaces;
     using Game.Data;
     using Game.Tools;
-    
+
     public class Engine
     {
         private const long ElapsedTicks = 10000;
@@ -92,7 +92,7 @@
             Random generator = this.unitGenerator.RandomGenerator;
             int randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
             Enemy currEnemy = this.movingObjects[randomEnemyIndex] as Enemy;
-            
+
             while (currEnemy == null)
             {
                 randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
@@ -138,10 +138,10 @@
         public virtual void Run()
         {
             Sounds.SFX(Sounds.SoundEffects.Move);
-            
+
             while (inLoop)
             {
-                
+
                 this.userInterface.ProcessInput(); // process event from the console
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
                 {
@@ -149,7 +149,7 @@
                     this.EnemyShoot();
                     this.stopWatch.Restart();
                 }
-                
+
                 //Print health points of the player
                 PrintCurrentStatus();
 
@@ -175,22 +175,27 @@
 
                     this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
                 }
-                catch(PlayerOutOfHPException ex)
+                catch
                 {
-                    Console.Clear();
-                    this.renderer.WriteOnPosition(ex.Message, new Point(1,1),
-                        ex.Message.Length + 10, ConsoleColor.Red);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    // ..............................................
+                    string exceptionMessage = "You are dead";
+                    this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1), exceptionMessage.Length + 10, ConsoleColor.Red);
+
                 }
 
                 Thread.Sleep(300);
             }
         }
 
-        public void Initialize(Level lvl)
-        { 
-            
+        public void Initialize(Level level)
+        {
+            AddPlayer(level.Player);
+            List<Enemy> enemies = level.Enemies;
+
+            foreach (var enemy in enemies)
+            {
+                AddObject(enemy);
+            }
         }
 
         private void PrintCurrentStatus()
@@ -201,6 +206,15 @@
             this.renderer.WriteOnPosition("Inventory: " + this.player.Weapon.Name, new Point(1, 21), 20, ConsoleColor.White);
 
             this.renderer.WriteOnPosition("Score: " + this.player.Score, new Point(1, 47), 20, ConsoleColor.Yellow);
+        }
+
+        public void Reset()
+        {
+            movingObjects.Clear();
+            staticObjects.Clear();
+            allObjects.Clear();
+
+
         }
     }
 }

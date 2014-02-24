@@ -56,7 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\PlayerOutOfHPException.cs" />
+    <Compile Include="Level\Level_2.cs" />
+    <Compile Include="Level\Level_3.cs" />
     <Compile Include="Tools\CollisionData.cs" />
     <Compile Include="Tools\CollisionDispatcher.cs" />
     <Compile Include="Tools\ConsoleRenderer.cs" />

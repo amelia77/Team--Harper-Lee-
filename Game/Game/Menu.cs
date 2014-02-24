@@ -3,6 +3,7 @@ using Game.Interfaces;
 using Game.Tools;
 using System;
 using System.Threading;
+using Game.Levels;
 
 namespace Game
 {
@@ -86,7 +87,7 @@ namespace Game
             }
         }
 
-        public static void ChooseLevel(IConsoleRenderer renderer, IUserInterface keyboard)
+        public static int ChooseLevel(IConsoleRenderer renderer, IUserInterface keyboard)
         {
             bool in_loop = true;
             int choice = 0;
@@ -108,8 +109,34 @@ namespace Game
 
                 Thread.Sleep(150);
             }
+            return choice;
         }
-        
+
+        public static void InitializeLevel(IConsoleRenderer renderer, IUserInterface keyboard, Engine engine)
+        {
+            int choice = ChooseLevel(renderer, keyboard);
+            switch (choice)
+            { 
+                case 1:
+                    engine.Reset();
+                    renderer.ClearScreen();
+                    engine.Initialize(new Level_1());
+                    break;
+                case 2:
+                    engine.Reset();
+                    renderer.ClearScreen();
+                    engine.Initialize(new Level_2());
+                    break;
+                case 3:
+                    engine.Reset();
+                    renderer.ClearScreen();
+                    engine.Initialize(new Level_3());
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public static void EnterMenu(IConsoleRenderer renderer, IUserInterface keyboard)
         {
             bool IN_LOOP = true;
@@ -152,7 +179,8 @@ namespace Game
                 Sounds.SFX(Sounds.SoundEffects.GameOver);
             };
             
-            Initialize(gameEngine);
+            var lvl = new Level_3();
+            gameEngine.Initialize(lvl);
 
             while (IN_LOOP)
             {
@@ -174,7 +202,7 @@ namespace Game
                         }*/
 
                     case 2:
-                        ChooseLevel(renderer, keyboard);
+                        InitializeLevel(renderer, keyboard, gameEngine);
                         break;
 
                     case 3:
@@ -188,7 +216,7 @@ namespace Game
             }
         }
 
-        private static void Initialize(Engine engine)
+        /*private static void Initialize(Engine engine)
         {
             char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
 
@@ -206,6 +234,6 @@ namespace Game
                 engine.AddObject(enemy);
             }
 
-        }
+        }*/
     }
 }
