@@ -175,12 +175,13 @@
 
                     this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
                 }
-                catch
+                catch(PlayerOutOfHPException ex)
                 {
-                    // ..............................................
-                    string exceptionMessage = "You are dead";
-                    this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1),
-                        exceptionMessage.Length + 10, ConsoleColor.Red);
+                    Console.Clear();
+                    this.renderer.WriteOnPosition(ex.Message, new Point(1,1),
+                        ex.Message.Length + 10, ConsoleColor.Red);
+                    Console.WriteLine();
+                    Environment.Exit(0);
                 }
 
                 Thread.Sleep(300);

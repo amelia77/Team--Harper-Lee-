@@ -35,9 +35,13 @@
             {
                 if (value<=0)
                 {
-                    throw new ArgumentException();
+                    throw new PlayerOutOfHPException("GAME OVER");
                 }
-                this.healthPoints = value;
+                else
+                {
+                    this.healthPoints = value;
+                }
+                
             }
         }
 
