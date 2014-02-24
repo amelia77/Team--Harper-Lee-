@@ -7,7 +7,7 @@
     {
         public UnitStatus status = UnitStatus.Enemy;
 
-        public Enemy(Point topLeft, char[,] image, Point speed, ConsoleColor color)
+        public Enemy(Point topLeft, char[,] image, Point speed, ConsoleColor color = ConsoleColor.Green)
             : base(topLeft, image, speed, color)
         {
         }

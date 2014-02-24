@@ -187,9 +187,15 @@
             }
         }
 
-        public void Initialize(Level lvl)
-        { 
-            
+        public void Initialize(Level level)
+        {
+            AddPlayer(level.Player);
+            List<Enemy> enemies = level.Enemies;
+
+            foreach (var enemy in enemies)
+            {
+                AddObject(enemy);
+            }
         }
 
         private void PrintCurrentStatus()
@@ -200,6 +206,15 @@
             this.renderer.WriteOnPosition("Inventory: " + this.player.Weapon.Name, new Point(1, 21), 20, ConsoleColor.White);
 
             this.renderer.WriteOnPosition("Score: " + this.player.Score, new Point(1, 47), 20, ConsoleColor.Yellow);
+        }
+
+        public void Reset()
+        { 
+            movingObjects.Clear();
+            staticObjects.Clear();
+            allObjects.Clear();
+
+            
         }
     }
 }
