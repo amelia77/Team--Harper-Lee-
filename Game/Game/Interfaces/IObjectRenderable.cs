@@ -1,6 +1,7 @@
-﻿using System;
-namespace Game
+﻿namespace Game.Interfaces
 {
+    using Game.Data;
+    using System;
     public interface IObjectRenderable
     {
         Point GetTopLeftCoords();

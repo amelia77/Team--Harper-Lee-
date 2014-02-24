@@ -5,6 +5,9 @@
     using System.Diagnostics;
     using System.Threading;
     using Game.Levels;
+    using Game.Interfaces;
+    using Game.Data;
+    using Game.Tools;
     
     public class Engine
     {

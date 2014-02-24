@@ -1,4 +1,4 @@
-﻿namespace Game
+﻿namespace Game.Data
 {
     using System;
     public class MagicTool : Weapon
@@ -10,10 +10,6 @@
 
          public override void Move()
          {
-             //if (this.topLeftCoords)
-             {
-
-             }
              base.Move();
          }
     }

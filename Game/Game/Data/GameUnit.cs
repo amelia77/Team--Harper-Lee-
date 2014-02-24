@@ -1,7 +1,9 @@
-﻿namespace Game
+﻿namespace Game.Data
 {
     using System.Collections.Generic;
     using System;
+    using Game.Interfaces;
+    using Game.Tools;
 
     public abstract class GameUnit : IObjectRenderable, IMovable, IObjectProducer, ICollidable
     {

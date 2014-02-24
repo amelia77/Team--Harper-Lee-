@@ -1,6 +1,8 @@
-﻿using System;
-namespace Game
+﻿namespace Game.Data
 {
+    using Game.Interfaces;
+    using Game.Tools;
+    using System;
     public class Enemy : MovingUnit, ICollidable, IMovable
     {
         public UnitStatus status = UnitStatus.Enemy;

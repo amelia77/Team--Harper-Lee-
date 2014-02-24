@@ -1,7 +1,9 @@
-﻿namespace Game
+﻿namespace Game.Data
 {
+    using Game.Interfaces;
+    using Game.Tools;
     using System;
-    public class Weapon : MovingUnit, IMovable, IWeapon, ICollidable
+    public class Weapon : MovingUnit, IWeapon
     {
         private const int MinRow = 3;
         private string name;

@@ -1,8 +1,8 @@
-﻿namespace Game
+﻿namespace Game.Tools
 {
-
+    using Game.Data;
     using System;
-using System.Collections.Generic;
+    using System.Collections.Generic;
     using System.Linq;
     public class GameUnitGenerator
     {

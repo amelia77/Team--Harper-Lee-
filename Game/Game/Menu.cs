@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Game.Data;
+using Game.Interfaces;
+using Game.Tools;
+using System;
 using System.Threading;
 
 namespace Game
@@ -149,7 +152,7 @@ namespace Game
                 Sounds.SFX(Sounds.SoundEffects.GameOver);
             };
             
-            GameProgram.Initialize(gameEngine);
+            Initialize(gameEngine);
 
             while (IN_LOOP)
             {
@@ -183,6 +186,26 @@ namespace Game
                         break;
                 }
             }
+        }
+
+        private static void Initialize(Engine engine)
+        {
+            char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
+
+            Player player = new Player(new Point(20, 10), hero, new Point(0, 0), ConsoleColor.Yellow);
+
+            engine.AddPlayer(player);
+
+            char[,] cat = ImageProducer.GetImage(@"..\..\images\bunny.txt");
+            for (int i = 0; i < 5; i++)
+            {
+                Enemy enemy = new Enemy(new Point(5, 10 * (i + 1)), cat, new Point(0, -1),
+                ConsoleColor.Red);
+                //Thread.Sleep(50);
+
+                engine.AddObject(enemy);
+            }
+
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-namespace Game
+﻿namespace Game.Tools
 {
+    using System.Collections.Generic;
+    using System.IO;
     public static class ImageProducer
     {
         //Get image from txt file and return a char[,] matrix of its image

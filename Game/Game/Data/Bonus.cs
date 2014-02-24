@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game.Data
 {
-    public enum BonusType
-    {
-        Health = 1,
-        MagicWeapon = 2,
-        CommonWeapon = 3
-    }
+    using Game.Tools;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class Bonus : MovingUnit
     {
 
@@ -42,7 +37,7 @@ namespace Game
         {
             if (this.topLeftCoords.Col < 1)
             {
-                this.Speed = new Point(this.Speed.Row, this.Speed.Col *(-1));
+                this.Speed = new Point(this.Speed.Row, this.Speed.Col * (-1));
             }
             this.UpdatePosition();
         }

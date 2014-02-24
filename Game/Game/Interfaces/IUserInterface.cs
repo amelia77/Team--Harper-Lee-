@@ -1,4 +1,4 @@
-﻿namespace Game
+﻿namespace Game.Interfaces
 {
     using System;
     public interface IUserInterface

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Game
+﻿namespace Game.Interfaces
 {
+    using Game.Data;
+    using System;
+    using System.Collections.Generic;
     public interface IConsoleRenderer
     {     
         void ReDraw(IObjectRenderable obj, bool something);

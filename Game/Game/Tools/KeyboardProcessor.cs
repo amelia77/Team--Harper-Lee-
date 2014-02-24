@@ -1,7 +1,8 @@
-﻿namespace Game
+﻿namespace Game.Tools
 {
+    using Game.Interfaces;
     using System;
-    public class KeyboardInterface: IUserInterface
+    public class KeyboardProvessor: IUserInterface
     {   
         public void ProcessInput()
         {

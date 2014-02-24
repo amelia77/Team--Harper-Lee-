@@ -1,7 +1,7 @@
-﻿
-using System;
-namespace Game
+﻿namespace Game.Data
 {
+    using Game.Interfaces;
+    using System;
     public abstract class MovingUnit: GameUnit, IMovable
     {
         public Point Speed { get; set; } // Moving coordinates

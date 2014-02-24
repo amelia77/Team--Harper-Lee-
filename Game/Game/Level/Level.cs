@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game.Levels
+﻿namespace Game.Levels
 {
+    using Game.Data;
+    using System.Collections.Generic;
     public class Level
     {
         List<Enemy> enemies;
