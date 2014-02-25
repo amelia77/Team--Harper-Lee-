@@ -82,9 +82,9 @@
 
         public virtual void PlayerShoot()
         {
-            MovingUnit weapon = this.player.Shoot();// get produced weapon
-            this.movingObjects.Add(weapon); // add it in the list with moving objects
-            this.allObjects.Add(weapon);
+            IList<MovingUnit> weapon = this.player.Shoot();// get produced weapon
+            this.movingObjects.AddRange(weapon); // add it in the list with moving objects
+            this.allObjects.AddRange(weapon);
         }
 
         public virtual void EnemyShoot()

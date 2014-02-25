@@ -3,6 +3,7 @@
     using Game.Interfaces;
     using Game.Tools;
     using System;
+    using System.Collections.Generic;
     public class Weapon : MovingUnit, IWeapon
     {
         private const int MinRow = 3;
@@ -75,7 +76,7 @@
 
         public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == UnitStatus.Enemy || otherStatus == UnitStatus.Player;
+            return otherStatus == UnitStatus.Enemy || otherStatus == UnitStatus.Player || otherStatus == UnitStatus.Bonus;
         }
 
         public override void RespondToCollision(CollisionData collisionData)
@@ -92,7 +93,7 @@
 
         public override void Move()
         {
-            if (this.topLeftCoords.Row <= MinRow)
+            if (this.topLeftCoords.Row <= MinRow || this.topLeftCoords.Col <= 0)
             {
                 this.isDestroyed = true;
             }
@@ -105,6 +106,13 @@
         public Weapon Clone()
         {
             return new Weapon(this.name, this.TopLeftCoords, this.image, this.Speed, this.Damage, ConsoleColor.Magenta);
+        }
+
+        public virtual IList<MovingUnit> GetWeapon()
+        {
+            IList<MovingUnit> list = new List<MovingUnit>();
+            list.Add(this.Clone());
+            return list;
         }
     }
 }

@@ -82,10 +82,10 @@
             currTopLeftRow++;
         }
 
-        public MovingUnit Shoot()
+        public IList<MovingUnit> Shoot()
         {
             this.Weapon.TopLeftCoords = new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2));
-            return this.Weapon.Clone();
+            return this.Weapon.GetWeapon();
         }
 
         public override UnitStatus GetStatus()
@@ -125,7 +125,7 @@
                 }
                 else if (bonus.Type == BonusType.CommonWeapon)
                 {
-                    this.Weapon = new Weapon("weapon", ShotCoords(),
+                    this.Weapon = new Weapon("Common weapon", ShotCoords(),
                 new char[,] { { '*' } }, new Point(-1, 0), 3);
                 }
                 

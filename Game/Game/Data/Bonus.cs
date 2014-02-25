@@ -25,7 +25,7 @@
 
         public override bool CanCollideWith(UnitStatus otherStatus)
         {
-            return otherStatus == UnitStatus.Player;
+            return otherStatus == UnitStatus.Player || otherStatus == UnitStatus.Enemy || otherStatus == UnitStatus.Weapon;
         }
 
         public override void RespondToCollision(CollisionData collisionData)
