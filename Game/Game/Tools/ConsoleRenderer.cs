@@ -7,20 +7,21 @@
     using System.Text;
     public class ConsoleRenderer: IConsoleRenderer
     {
-        int renderFieldMatrixRows;
-        int renderFieldMatrixCols;
         char[,] renderGameFieldMatrix;
 
         public ConsoleRenderer(int visibleConsoleRows, int visibleConsoleCols)
         {
             renderGameFieldMatrix = new char[visibleConsoleRows, visibleConsoleCols];
 
-            this.renderFieldMatrixRows = renderGameFieldMatrix.GetLength(0);
-            this.renderFieldMatrixCols = renderGameFieldMatrix.GetLength(1);
+            this.RenderFieldMatrixRows = renderGameFieldMatrix.GetLength(0);
+            this.RenderFieldMatrixCols = renderGameFieldMatrix.GetLength(1);
 
-            Console.BufferHeight = Console.WindowHeight = renderFieldMatrixRows;
-            Console.BufferWidth = Console.WindowWidth = renderFieldMatrixCols;
+            Console.BufferHeight = Console.WindowHeight = RenderFieldMatrixRows;
+            Console.BufferWidth = Console.WindowWidth = RenderFieldMatrixCols;
         }
+
+        public int RenderFieldMatrixRows { get; private set; }
+        public int RenderFieldMatrixCols { get; private set; }
 
         public void WriteOnPosition(
             string text,
@@ -83,8 +84,8 @@
             int imageRows = obj.GetImage().GetLength(0);
             int imageCols = obj.GetImage().GetLength(1);
 
-            int lastRow = Math.Min(objTopLeftCoords.Row + imageRows, this.renderFieldMatrixRows);
-            int lastCol = Math.Min(objTopLeftCoords.Col + imageCols, this.renderFieldMatrixCols);
+            int lastRow = Math.Min(objTopLeftCoords.Row + imageRows, this.RenderFieldMatrixRows);
+            int lastCol = Math.Min(objTopLeftCoords.Col + imageCols, this.RenderFieldMatrixCols);
 
 
             for (int row = obj.GetTopLeftCoords().Row; row < lastRow; row++)
@@ -114,8 +115,8 @@
             int imageRows = obj.GetImage().GetLength(0);
             int imageCols = obj.GetImage().GetLength(1);
 
-            int lastRow = Math.Min(objTopLeftCoords.Row + imageRows, this.renderFieldMatrixRows);
-            int lastCol = Math.Min(objTopLeftCoords.Col + imageCols, this.renderFieldMatrixCols);
+            int lastRow = Math.Min(objTopLeftCoords.Row + imageRows, this.RenderFieldMatrixRows);
+            int lastCol = Math.Min(objTopLeftCoords.Col + imageCols, this.RenderFieldMatrixCols);
 
 
             for (int row = obj.GetTopLeftCoords().Row; row < lastRow; row++)

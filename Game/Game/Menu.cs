@@ -142,7 +142,7 @@ namespace Game
             bool IN_LOOP = true;
 
             Random randomGenerator = new Random();
-            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
+            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(25, 30));
 
 
             Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);

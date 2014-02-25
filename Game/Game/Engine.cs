@@ -14,18 +14,17 @@
         private const long ElapsedTicks = 10000;
         private IConsoleRenderer renderer; // Console printer
         private IUserInterface userInterface; //event handler
-        private GameUnitGenerator unitGenerator;
+        private GameUnitGenerator unitGenerator; // bonus generator
         public bool inLoop = true;
 
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
         private List<GameUnit> allObjects; //list with all objects on the screne
-
         private Player player; //player
-
         private Stopwatch stopWatch;
 
-        public Engine(IConsoleRenderer renderer, IUserInterface userInterface, GameUnitGenerator unitGenerator)
+        public Engine(IConsoleRenderer renderer, IUserInterface userInterface, 
+            GameUnitGenerator unitGenerator)
         {
             this.renderer = renderer;
             this.userInterface = userInterface;
@@ -52,6 +51,7 @@
         {
             //first remove old player from the list
             this.player = obj as Player;
+            this.player.MaxMovePoint = new Point(renderer.RenderFieldMatrixRows, renderer.RenderFieldMatrixCols);
             GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords().Equals(player.GetTopLeftCoords()));
             allObjects.Remove(foundUnit);
 
@@ -61,18 +61,17 @@
 
         public virtual void MovePlayerLeft()
         {
-            this.player.MoveLeft(); // move player left
+            this.player.MoveLeft(); 
         }
 
         public virtual void MovePlayerRight()
         {
-            this.player.MoveRight(); // move player right
+            this.player.MoveRight(); 
         }
 
         public virtual void MovePlayerDown()
         {
             this.player.MoveDown();
-
         }
 
         public virtual void MovePlayerUp()
@@ -137,8 +136,7 @@
 
         public virtual void Run()
         {
-            Sounds.SFX(Sounds.SoundEffects.Move);
-            
+            Sounds.SFX(Sounds.SoundEffects.Move);           
             while (inLoop)
             {
                 
@@ -150,7 +148,7 @@
                     this.stopWatch.Restart();
                 }
                 
-                //Print health points of the player
+                //Print player status
                 PrintCurrentStatus();
 
                 //Print all game units and move them if necessary
@@ -177,7 +175,6 @@
                 }
                 catch
                 {
-                    // ..............................................
                     string exceptionMessage = "You are dead";
                     this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1),
                         exceptionMessage.Length + 10, ConsoleColor.Red);

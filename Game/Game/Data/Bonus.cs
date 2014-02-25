@@ -9,8 +9,8 @@
 
     public class Bonus : MovingUnit
     {
-
-        public Bonus(BonusType type, Point topLeftCoords, char[,] image, Point speed, ConsoleColor color = ConsoleColor.Magenta)
+        public Bonus(BonusType type, Point topLeftCoords, char[,] image, Point speed, 
+            ConsoleColor color = ConsoleColor.Green)
             : base(topLeftCoords, image, speed, color)
         {
             this.Type = type;

@@ -28,14 +28,15 @@
             {
                 this.Speed = new Point(1, this.Speed.Col);
             }
-            if (collisionData.CollisionForceDirection.Col * this.Speed.Col < 0)
+            else if (collisionData.CollisionForceDirection.Col * this.Speed.Col < 0)
             {
                 this.Speed = new Point(this.Speed.Row, 0);
             }
-            if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Enemy))
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Enemy))
             {
-                //this.Speed.Row = 1;
-                //this.Speed.Col = 0;
+            }
+            else if (collisionData.hitObjectsCollisionGroupStrings.Contains(UnitStatus.Bonus))
+            {       
             }
             else
             {
@@ -58,10 +59,11 @@
 
         public MovingUnit Shoot()
         {
+            Point shootingSpeed = new Point(1, 0);
             int topLeftRow = this.TopLeftCoords.Row + this.image.GetLength(0);
             int topLeftCol = (2 * this.TopLeftCoords.Col + this.GetImage().GetLength(1)) / 2;
             Point topLeftCoords = new Point(topLeftRow, topLeftCol);
-            return new Weapon("weapon", topLeftCoords, new char[,] { { 'o' } }, new Point(1, 0), 10, ConsoleColor.Blue);
+            return new Weapon("weapon", topLeftCoords, new char[,] { { 'C', '#' } }, shootingSpeed, 10, ConsoleColor.Blue);
         }
 
     }

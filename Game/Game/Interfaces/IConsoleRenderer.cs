@@ -4,7 +4,9 @@
     using System;
     using System.Collections.Generic;
     public interface IConsoleRenderer
-    {     
+    {
+        int RenderFieldMatrixRows { get; }
+        int RenderFieldMatrixCols { get; }
         void ReDraw(IObjectRenderable obj, bool something);
         void WriteOnPosition(
             string text,
