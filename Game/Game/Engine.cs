@@ -175,18 +175,23 @@
                 }
                 catch
                 {
-                    string exceptionMessage = "You are dead.";
-                    this.renderer.ClearScreen();
-                    this.renderer.DrawTextBoxTopLeft(exceptionMessage, 
+                    this.renderer.ClearScreen(); //clearing the screen
+                    
+                    this.renderer.DrawTextBoxTopLeft("You are dead.",  //printing "You're dead." in a nice box
                         Console.WindowWidth/2 - 6, 
                         Console.WindowHeight/2 - 2, ConsoleColor.Red);
-                    Thread.Sleep(1000);
-                    this.renderer.ClearScreen();
-                    this.renderer.DrawTextBoxTopLeft("Try again!",
+                    
+                    Thread.Sleep(1000); //giving the user a second to read that he's dead like he doesn't already know it.
+                    
+                    this.renderer.ClearScreen(); // clearing the screen
+
+                    this.renderer.DrawTextBoxTopLeft("Try again!", //Print a "Try again!" message
                         Console.WindowWidth / 2 - 5,
                         Console.WindowHeight / 2 - 2, ConsoleColor.Red);
+                    
                     Thread.Sleep(1000);
-                    this.Break();
+                    
+                    this.Break(); //And jump to the main menu
                 }
 
                 Thread.Sleep(300);
