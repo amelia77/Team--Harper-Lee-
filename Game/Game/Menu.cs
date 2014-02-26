@@ -16,7 +16,7 @@
         private static Level level = new Level_1();
         
         private static char[,] hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
-        private static Player player = new Player(new Point(20, 10), hero, new Point(0, 0));
+        private static Player player = new Player(new Point(20, x + 7), hero, new Point(0, 0));
 
         private static string[] menuRows = new string[]
         {
@@ -189,19 +189,19 @@
                         { 
                             case 0:
                                 char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
-                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                player = new Player(new Point(20, x + 7), hero, new Point(0, 0));
                                 engine.SetPlayer(player);
                                 inLoop = false;
                                 break;
                             case 1:
                                 hero = ImageProducer.GetImage(@"..\..\images\student.txt");
-                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                player = new Player(new Point(20, x + 7), hero, new Point(0, 0));
                                 engine.SetPlayer(player);
                                 inLoop = false;
                                 break;
                             case 2:
                                 hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
-                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                player = new Player(new Point(20, x + 7), hero, new Point(0, 0));
                                 engine.SetPlayer(player);
                                 inLoop = false;
                                 break;
