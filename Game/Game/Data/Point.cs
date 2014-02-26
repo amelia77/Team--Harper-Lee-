@@ -22,7 +22,7 @@
             return new Point(a.Row - b.Row, a.Col - b.Col);
         }
 
-        public override bool Equals(object obj) // So two point can be compared
+        public override bool Equals(object obj)
         {
             Point objAsMatrixCoords = (Point)obj;
 

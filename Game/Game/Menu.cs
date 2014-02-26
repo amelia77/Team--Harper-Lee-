@@ -12,21 +12,18 @@ namespace Game
         private static int choice;
         private static int x = GameProgram.WORLD_COLS / 2 - 11;
         private static int y = GameProgram.WORLD_ROWS / 3;
+        private static Level level = new Level_1();
 
         private static string[] menuRows = new string[]
         {
-            "Start Game",
+            "New Game",
             "Continue Game",
+            "Player",
             "Level",
             "Exit"
         };
 
-       /* public Menu(string[] _menu)
-        {
-            menuRows = _menu;
-        }*/
-
-        private static int ChooseFromMenu(IConsoleRenderer renderer)
+        private static string ChooseFromMenu(IConsoleRenderer renderer)
         {
             while (true)
             {
@@ -60,7 +57,7 @@ namespace Game
 
                     else if (pressedKey.Key == ConsoleKey.Enter)
                     {
-                        return choice;
+                        return menuRows[choice];
                     }
                 }
 
@@ -119,21 +116,116 @@ namespace Game
             { 
                 case 1:
                     engine.Reset();
-                    renderer.ClearScreen();
-                    engine.Initialize(new Level_1());
+                    level = new Level_1();
+                    engine.Initialize(level);
                     break;
                 case 2:
                     engine.Reset();
-                    renderer.ClearScreen();
-                    engine.Initialize(new Level_2());
+                    level = new Level_2();
+                    engine.Initialize(level);
                     break;
                 case 3:
                     engine.Reset();
-                    renderer.ClearScreen();
-                    engine.Initialize(new Level_3());
+                    level = new Level_3();
+                    engine.Initialize(level);
                     break;
                 default:
                     break;
+            }
+        }
+
+        public static void InitializePlayer(IConsoleRenderer renderer, IUserInterface keyboard, Engine engine)
+        {
+            bool inLoop = true;
+            int choice = 0;
+
+            while (inLoop)
+            {
+                const int MAX_CHOICES = 2;
+
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo pressedKey = Console.ReadKey(true);
+
+                    if (pressedKey.Key == ConsoleKey.UpArrow)
+                    {
+                        if (choice > 0)
+                        {
+                            choice--;
+                        }
+                        else
+                        {
+                            choice = MAX_CHOICES;
+                        }
+                    }
+
+                    else if (pressedKey.Key == ConsoleKey.DownArrow)
+                    {
+                        if (choice < MAX_CHOICES)
+                        {
+                            choice++;
+                        }
+                        else
+                        {
+                            choice = 0;
+                        }
+                    }
+
+                    else if (pressedKey.Key == ConsoleKey.Enter)
+                    {
+                        switch (choice)
+                        { 
+                            case 0:
+                                char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
+                                Player player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                engine.SetPlayer(player);
+                                inLoop = false;
+                                break;
+                            case 1:
+                                hero = ImageProducer.GetImage(@"..\..\images\student.txt");
+                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                engine.SetPlayer(player);
+                                inLoop = false;
+                                break;
+                            case 2:
+                                hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
+                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                engine.SetPlayer(player);
+                                inLoop = false;
+                                break;
+                        }
+                    }
+                }
+
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
+
+                //renderer.ClearScreen();
+
+                switch (choice)
+                { 
+                    case 0:
+                        renderer.ClearScreen();
+                        char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
+                        renderer.DrawImage(hero, 10, 10);
+                        break;
+                    case 1:
+                        renderer.ClearScreen();
+                        hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
+                        renderer.DrawImage(hero, 10, 10);
+                        break;
+                    case 2:
+                        renderer.ClearScreen();
+                        hero = ImageProducer.GetImage(@"..\..\images\student.txt");
+                        renderer.DrawImage(hero, 10, 10);
+                        break;
+                    default:
+                        break;
+                }
+
+                Thread.Sleep(150);
             }
         }
 
@@ -142,7 +234,7 @@ namespace Game
             bool IN_LOOP = true;
 
             Random randomGenerator = new Random();
-            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(30, 30));
+            GameUnitGenerator unitGenerator = new GameUnitGenerator(randomGenerator, new Point(5, 5), new Point(25, 30));
 
 
             Engine gameEngine = new Engine(renderer, keyboard, unitGenerator);
@@ -179,33 +271,47 @@ namespace Game
                 Sounds.SFX(Sounds.SoundEffects.GameOver);
             };
             
-            var lvl = new Level_3();
-            gameEngine.Initialize(lvl);
+            gameEngine.Initialize(level);
 
             while (IN_LOOP)
             {
-                int choice = ChooseFromMenu(renderer);
+                string choice = ChooseFromMenu(renderer);
 
                 switch (choice)
                 {
-                    case 0:
+                    case "New Game":
+                        {
+                            renderer.ClearScreen();
+                            gameEngine.Reset();
+                            gameEngine.inLoop = true;
+                            gameEngine.Initialize(level);
+                            gameEngine.Run();
+                            break;
+                        }
+
+                    case "Continue Game":
                         {
                             renderer.ClearScreen();
                             gameEngine.inLoop = true;
                             gameEngine.Run();
+                            break;
                         }
-                        break;
 
-                    /*case 1:
+                    case "Player":
                         {
-                            Console.Clear();
-                        }*/
+                            renderer.ClearScreen();
+                            InitializePlayer(renderer, keyboard, gameEngine);
+                            break;
+                        }
 
-                    case 2:
-                        InitializeLevel(renderer, keyboard, gameEngine);
-                        break;
+                    case "Level":
+                        {
+                            renderer.ClearScreen();
+                            InitializeLevel(renderer, keyboard, gameEngine);
+                            break;
+                        }
 
-                    case 3:
+                    case "Exit":
                         IN_LOOP = false;
                         break;
 
@@ -215,25 +321,5 @@ namespace Game
                 }
             }
         }
-
-        /*private static void Initialize(Engine engine)
-        {
-            char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
-
-            Player player = new Player(new Point(20, 10), hero, new Point(0, 0), ConsoleColor.Yellow);
-
-            engine.AddPlayer(player);
-
-            char[,] cat = ImageProducer.GetImage(@"..\..\images\bunny.txt");
-            for (int i = 0; i < 5; i++)
-            {
-                Enemy enemy = new Enemy(new Point(5, 10 * (i + 1)), cat, new Point(0, -1),
-                ConsoleColor.Red);
-                //Thread.Sleep(50);
-
-                engine.AddObject(enemy);
-            }
-
-        }*/
     }
 }

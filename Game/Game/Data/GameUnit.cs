@@ -11,7 +11,6 @@
         protected char[,] image; //image of the object 
         protected bool isDestroyed; // is object already destroyed
 
-        public ConsoleColor ImageColor { get; set; }
         protected GameUnit(Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
         {
             this.TopLeftCoords = topLeftCoords;
@@ -20,13 +19,15 @@
             this.ImageColor = color;
         }
 
+        public ConsoleColor ImageColor { get; set; }
+
         public Point TopLeftCoords
         {
             get
             {
                 return new Point(this.topLeftCoords.Row, this.topLeftCoords.Col);
             }
-            internal set
+            protected set
             {
                 this.topLeftCoords = new Point(value.Row, value.Col);
             }
@@ -42,26 +43,6 @@
             {
                 this.isDestroyed = value;
             }
-        }
-
-        public ConsoleColor Color { get; set; }
-
-        char[,] CopyImageMatrix(char[,] matrixToCopy)
-        {
-            int rows = matrixToCopy.GetLength(0);
-            int cols = matrixToCopy.GetLength(1);
-
-            char[,] result = new char[rows, cols];
-
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < cols; col++)
-                {
-                    result[row, col] = matrixToCopy[row, col];
-                }
-            }
-
-            return result;
         }
 
         public virtual char[,] GetImage()
@@ -112,6 +93,24 @@
         public virtual UnitStatus GetStatus()
         {
             return UnitStatus.EmptyUnit;
+        }
+
+        private char[,] CopyImageMatrix(char[,] matrixToCopy)
+        {
+            int rows = matrixToCopy.GetLength(0);
+            int cols = matrixToCopy.GetLength(1);
+
+            char[,] result = new char[rows, cols];
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    result[row, col] = matrixToCopy[row, col];
+                }
+            }
+
+            return result;
         }
     }
 }

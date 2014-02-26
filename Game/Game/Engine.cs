@@ -8,24 +8,23 @@
     using Game.Interfaces;
     using Game.Data;
     using Game.Tools;
-
+    
     public class Engine
     {
         private const long ElapsedTicks = 10000;
         private IConsoleRenderer renderer; // Console printer
         private IUserInterface userInterface; //event handler
-        private GameUnitGenerator unitGenerator;
+        private GameUnitGenerator unitGenerator; // bonus generator
         public bool inLoop = true;
 
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
         private List<GameUnit> allObjects; //list with all objects on the screne
-
         private Player player; //player
-
         private Stopwatch stopWatch;
 
-        public Engine(IConsoleRenderer renderer, IUserInterface userInterface, GameUnitGenerator unitGenerator)
+        public Engine(IConsoleRenderer renderer, IUserInterface userInterface, 
+            GameUnitGenerator unitGenerator)
         {
             this.renderer = renderer;
             this.userInterface = userInterface;
@@ -52,6 +51,7 @@
         {
             //first remove old player from the list
             this.player = obj as Player;
+            this.player.MaxMovePoint = new Point(renderer.RenderFieldMatrixRows, renderer.RenderFieldMatrixCols);
             GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords().Equals(player.GetTopLeftCoords()));
             allObjects.Remove(foundUnit);
 
@@ -61,18 +61,17 @@
 
         public virtual void MovePlayerLeft()
         {
-            this.player.MoveLeft(); // move player left
+            this.player.MoveLeft(); 
         }
 
         public virtual void MovePlayerRight()
         {
-            this.player.MoveRight(); // move player right
+            this.player.MoveRight(); 
         }
 
         public virtual void MovePlayerDown()
         {
             this.player.MoveDown();
-
         }
 
         public virtual void MovePlayerUp()
@@ -92,7 +91,7 @@
             Random generator = this.unitGenerator.RandomGenerator;
             int randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
             Enemy currEnemy = this.movingObjects[randomEnemyIndex] as Enemy;
-
+            
             while (currEnemy == null)
             {
                 randomEnemyIndex = generator.Next(0, this.movingObjects.Count);
@@ -137,11 +136,10 @@
 
         public virtual void Run()
         {
-            Sounds.SFX(Sounds.SoundEffects.Move);
-
+            Sounds.SFX(Sounds.SoundEffects.Move);           
             while (inLoop)
             {
-
+                
                 this.userInterface.ProcessInput(); // process event from the console
                 if (stopWatch.ElapsedMilliseconds > ElapsedTicks)
                 {
@@ -149,8 +147,8 @@
                     this.EnemyShoot();
                     this.stopWatch.Restart();
                 }
-
-                //Print health points of the player
+                
+                //Print player status
                 PrintCurrentStatus();
 
                 //Print all game units and move them if necessary
@@ -175,13 +173,11 @@
 
                     this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
                 }
-                catch (PlayerOutOfHPException ex)
+                catch
                 {
-                    Console.Clear();
-                    this.renderer.WriteOnPosition(ex.Message, new Point(1, 1),
-                        ex.Message.Length + 10, ConsoleColor.Red);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    string exceptionMessage = "You are dead";
+                    this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1),
+                        exceptionMessage.Length + 10, ConsoleColor.Red);
                 }
 
                 Thread.Sleep(300);
@@ -210,12 +206,15 @@
         }
 
         public void Reset()
-        {
+        { 
             movingObjects.Clear();
             staticObjects.Clear();
-            allObjects.Clear();
+            allObjects.Clear();            
+        }
 
-
+        public void SetPlayer(Player initionalPlayer)
+        {
+            AddPlayer(initionalPlayer);
         }
     }
 }

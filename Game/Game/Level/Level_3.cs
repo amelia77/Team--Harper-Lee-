@@ -24,7 +24,7 @@
                 List<Enemy> enemies = new List<Enemy>();
 
                 char[,] cat = ImageProducer.GetImage(@"..\..\images\C#.txt");
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i <10; i++)
                 {
                     Enemy enemy = new Enemy(new Point(5, 10 * (i + 1)), cat, new Point(0, -1));
                     //Thread.Sleep(50);
