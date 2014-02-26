@@ -37,8 +37,7 @@
             this.isDestroyed = true;
         }
 
-        //the bonuses' initial direction is calculated based on the player's last move
-        //bounces off left wall if movemet is to the left
+        //if a bonus reaches a wall it reflects in opposite direction
         public override void Move()
         {
             if (this.topLeftCoords.Col < 1)

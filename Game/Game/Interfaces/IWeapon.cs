@@ -5,7 +5,7 @@
 
     public interface IWeapon
     {
-        //get set to the position of the part of the player that fires the weapon
+        //top left coordinates of weapons image
         Point Position { get; set; }
 
         string Name { get; set; }

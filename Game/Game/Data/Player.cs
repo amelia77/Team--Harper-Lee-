@@ -135,11 +135,11 @@
                 }
 
                 //else if (bonus.Type == BonusType.CommonWeapon)
-                //{
+               //{
                 //    this.Weapon = new Weapon("Common weapon", ShotCoords(),
                 //                     new char[,] { { '*' } }, new Point(-1, 0), 3);
                 //}
-                
+                 
             }
         }
 

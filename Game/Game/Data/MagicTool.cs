@@ -15,7 +15,6 @@
         {
         }
 
-        
          public override IList<MovingUnit> GetWeapon()
          {
              IList<MovingUnit> list = new List<MovingUnit>();

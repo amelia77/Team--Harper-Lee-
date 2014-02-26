@@ -64,7 +64,7 @@
             this.UpdatePosition();
         }
 
-        //when the enemies reach the left-hand side of the console they start shooting straight down at the player
+        //Enemy can shoot straight down
         public MovingUnit Shoot()
         {
             Point shootingSpeed = new Point(1, 0);
