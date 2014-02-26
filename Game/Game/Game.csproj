@@ -97,6 +97,7 @@
   <ItemGroup>
     <Content Include="images\hero.txt" />
     <Content Include="images\pacman.txt" />
+    <Content Include="images\win.txt" />
     <Content Include="music\Bonus.wav" />
     <Content Include="music\Death.wav" />
     <Content Include="music\Game-music.wav" />

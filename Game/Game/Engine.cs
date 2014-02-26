@@ -20,7 +20,6 @@
         private List<MovingUnit> movingObjects; // add moving objects
         private List<GameUnit> staticObjects; //static
         private List<GameUnit> allObjects; //list with all objects on the screne
-        private List<Enemy> enemies;
         private Player player; //player
         private Stopwatch stopWatch;
 
@@ -34,7 +33,6 @@
             this.staticObjects = new List<GameUnit>();
             this.movingObjects = new List<MovingUnit>();
             this.allObjects = new List<GameUnit>();
-            this.enemies = new List<Enemy>();
             this.stopWatch = new Stopwatch();
             stopWatch.Start();
         }
@@ -115,11 +113,6 @@
 
         public virtual void AddObject(GameUnit obj)
         {
-            if (obj is Enemy)
-            {
-                enemies.Add(obj as Enemy);
-            }
-
             if (obj is MovingUnit)
             {
                 this.AddMovingObject(obj as MovingUnit);
@@ -181,8 +174,18 @@
                     this.allObjects.RemoveAll(obj => obj.IsDestroyed);
                     this.movingObjects.RemoveAll(obj => obj.IsDestroyed);
                     this.staticObjects.RemoveAll(obj => obj.IsDestroyed);
-
                     this.renderer.ClearDestroyedObjects(destroyedObjects); // clear all destroyed objects
+
+                    int livingEnemies = allObjects.FindAll(enemy => enemy.GetType().Name == "Enemy").Count;
+                    if (livingEnemies==0)
+                    {
+                        inLoop = false;
+                        char[,] winImage = ImageProducer.GetImage(@"..\..\images\win.txt");
+                        renderer.ClearScreen();
+                        renderer.DrawImage(winImage, 0, 0, ConsoleColor.DarkRed);
+                        Thread.Sleep(5000);
+                    }
+                    
                 }
                 catch
                 {
@@ -203,12 +206,6 @@
                     Thread.Sleep(1000);
                     
                     this.Break(); //And jump to the main menu
-                }
-
-                if (enemies.Count == 0)
-                {
-                    inLoop = false;
-                    renderer.DrawTextBoxTopLeft("You won", 20, 29);
                 }
 
                 Thread.Sleep(300);
