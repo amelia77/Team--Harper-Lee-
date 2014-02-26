@@ -56,6 +56,9 @@
             this.player.MaxMovePoint = new Point(renderer.RenderFieldMatrixRows, renderer.RenderFieldMatrixCols);
             GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords().Equals(player.GetTopLeftCoords()));
             allObjects.Remove(foundUnit);
+
+            allObjects.Remove(player);
+            staticObjects.Clear();
             
             //add the new player
             this.player = obj as Player; 

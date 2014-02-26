@@ -219,12 +219,12 @@
                         break;
                     case 1:
                         renderer.ClearScreen();
-                        hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
+                        hero = ImageProducer.GetImage(@"..\..\images\student.txt");
                         renderer.DrawImage(hero, 10, 10);
                         break;
                     case 2:
                         renderer.ClearScreen();
-                        hero = ImageProducer.GetImage(@"..\..\images\student.txt");
+                        hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
                         renderer.DrawImage(hero, 10, 10);
                         break;
                     default:
