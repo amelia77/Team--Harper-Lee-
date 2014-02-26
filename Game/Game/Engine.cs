@@ -217,7 +217,8 @@
 
         public void Initialize(Level level)
         {
-            AddPlayer(level.Player);
+            //AddPlayer(level.Player);
+            
             List<Enemy> enemies = level.Enemies;
 
             foreach (var enemy in enemies)

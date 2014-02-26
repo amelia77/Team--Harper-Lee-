@@ -14,6 +14,9 @@
         private static int x = GameProgram.WORLD_COLS / 2 - 11;
         private static int y = GameProgram.WORLD_ROWS / 3;
         private static Level level = new Level_1();
+        
+        private static char[,] hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
+        private static Player player = new Player(new Point(20, 10), hero, new Point(0, 0));
 
         private static string[] menuRows = new string[]
         {
@@ -74,11 +77,11 @@
                 {
                     if (i == choice)
                     {
-                        renderer.DrawTextBoxTopLeft(menuRows[i], x + i * (x / 3) - 1, y + rowSpace - 2, ConsoleColor.White);
+                        renderer.DrawTextBoxTopLeft(menuRows[i], x + i * (x / 3) - 5, y + rowSpace - 2, ConsoleColor.White);
                     }
                     else
                     {
-                        renderer.WriteOnPosition(menuRows[i], x + i * (x / 3), y + rowSpace - 1);
+                        renderer.WriteOnPosition(menuRows[i], x + i * (x / 3) - 4, y + rowSpace - 1);
                     }
                 }
 
@@ -123,16 +126,19 @@
                     engine.Reset();
                     level = new Level_1();
                     engine.Initialize(level);
+                    engine.SetPlayer(player);
                     break;
                 case 2:
                     engine.Reset();
                     level = new Level_2();
                     engine.Initialize(level);
+                    engine.SetPlayer(player);
                     break;
                 case 3:
                     engine.Reset();
                     level = new Level_3();
                     engine.Initialize(level);
+                    engine.SetPlayer(player);
                     break;
                 default:
                     break;
@@ -183,7 +189,7 @@
                         { 
                             case 0:
                                 char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
-                                Player player = new Player(new Point(20, 10), hero, new Point(0, 0));
+                                player = new Player(new Point(20, 10), hero, new Point(0, 0));
                                 engine.SetPlayer(player);
                                 inLoop = false;
                                 break;
@@ -210,28 +216,32 @@
 
                 //renderer.ClearScreen();
 
+                const int height = 8;
                 switch (choice)
                 { 
                     case 0:
                         renderer.ClearScreen();
                         char[,] hero = ImageProducer.GetImage(@"..\..\images\pacman.txt");
-                        renderer.DrawImage(hero, 10, 10);
+                        renderer.DrawImage(hero, 10, height);
+                        renderer.DrawTextBoxTopLeft("Packman in the wrong game", 20, height);
                         break;
                     case 1:
                         renderer.ClearScreen();
                         hero = ImageProducer.GetImage(@"..\..\images\student.txt");
-                        renderer.DrawImage(hero, 10, 10);
+                        renderer.DrawImage(hero, 10, height);
+                        renderer.DrawTextBoxTopLeft("Confused student", 20, height);
                         break;
                     case 2:
                         renderer.ClearScreen();
                         hero = ImageProducer.GetImage(@"..\..\images\spaceship.txt");
-                        renderer.DrawImage(hero, 10, 10);
+                        renderer.DrawImage(hero, 10, height);
+                        renderer.DrawTextBoxTopLeft("Nasa powerful spaceship", 20, height);
                         break;
                     default:
                         break;
                 }
 
-                Thread.Sleep(150);
+                Thread.Sleep(200);
             }
         }
 
@@ -278,6 +288,7 @@
             };
             
             gameEngine.Initialize(level);
+            gameEngine.SetPlayer(player);
 
             while (IN_LOOP)
             {
@@ -291,6 +302,7 @@
                             gameEngine.Reset();
                             gameEngine.inLoop = true;
                             gameEngine.Initialize(level);
+                            gameEngine.SetPlayer(player);
                             gameEngine.Run();
                             break;
                         }
