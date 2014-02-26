@@ -3,12 +3,18 @@
     using Game.Data;
     using System.Collections.Generic;
 
+    //Summary:
+    //Declares constructors for collision between GameUnits. Checks for direction and which group they belong to.
+    //Declares two overloads.
+    
+
     public class CollisionData
     {
         public readonly Point CollisionForceDirection; // direction of the current game unit
         public readonly List<UnitStatus> hitObjectsCollisionGroupStrings;
         public readonly List<GameUnit> hitObjectsCollisionUnits;
 
+        
         public CollisionData(Point collisionForceDirection, UnitStatus objectCollisionGroupString, GameUnit hitObjectsCollisionUnits)
         {
             this.CollisionForceDirection = collisionForceDirection;

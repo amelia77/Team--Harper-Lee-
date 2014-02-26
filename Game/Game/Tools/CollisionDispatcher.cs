@@ -42,9 +42,11 @@
                 }
 
                 int diagonalIndex = -1;
+
                 if (horizontalIndex == -1 && verticalIndex == -1)
                 {
                     diagonalIndex = DiagonalCollisionIndex(movingObject, staticObjects);
+
                     if (diagonalIndex != -1)
                     {
                         movingCollisionForceDirection.Row = -movingObject.Speed.Row;
@@ -136,6 +138,7 @@
             return collisionIndex;
         }
 
+        //returns -1 if there is no collision
         private static int GetCollisionIndex(MovingUnit moving, ICollection<GameUnit> objects, List<Point> movingProfile)
         {
             int collisionIndex = 0;
@@ -158,6 +161,7 @@
             return -1;
         }
 
+        //checks for collision
         private static bool ProfilesIntersect(List<Point> firstProfile, List<Point> secondProfile)
         {
             foreach (var firstCoord in firstProfile)
@@ -206,10 +210,12 @@
                 }
 
                 int diagonalIndex = -1;
+
                 if (horizontalIndex == -1 && verticalIndex == -1)
                 {
 
                     diagonalIndex = DiagonalCollisionIndex(movingObject, movingObjects);
+
                     if (diagonalIndex != -1)
                     {
                         //movingCollisionForceDirection.Row = -movingObject.Speed.Row;

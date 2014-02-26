@@ -5,6 +5,9 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+
+    //Summary:
+    //Draws on the console
     public class ConsoleRenderer: IConsoleRenderer
     {
         char[,] renderGameFieldMatrix;

@@ -4,8 +4,10 @@
     using Game.Tools;
     using System;
     using System.Collections.Generic;
+
     public class Weapon : MovingUnit, IWeapon
     {
+        //fields
         private const int MinMoveRow = 3;
 
         public UnitStatus status = UnitStatus.Weapon;
@@ -13,6 +15,7 @@
         private int damage;
         private int ammo;       
 
+        //constructor
         public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, 
             ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
@@ -22,6 +25,7 @@
             this.Ammo = ammo;
         }
 
+        //properties
         public string Name
         {
             get
@@ -37,6 +41,7 @@
                 this.name = value;
             }
         }
+
         public Point Position
         {
             get
@@ -81,6 +86,7 @@
             }
         }
 
+        //methods
         public override UnitStatus GetStatus()
         {
             return this.status;

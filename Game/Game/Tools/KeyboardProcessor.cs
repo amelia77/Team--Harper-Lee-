@@ -2,7 +2,10 @@
 {
     using Game.Interfaces;
     using System;
-    public class KeyboardProvessor: IUserInterface
+
+    //Summary:
+    //Handles keyboard input and events
+    public class KeyboardProcessor: IUserInterface
     {   
         public void ProcessInput()
         {

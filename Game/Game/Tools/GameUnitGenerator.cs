@@ -4,6 +4,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    //Summary:
+    //Generates random bonuses
     public class GameUnitGenerator
     {
         private const int staticUnitCount = 1;
@@ -27,6 +30,7 @@
             }
         }
 
+        //generates static bonuses randomly
         public List<MovingUnit> GenerateStaticUnit(List<GameUnit> allUnitsInTheGameSoFar)
         {
             
@@ -53,6 +57,7 @@
             return staticUnits;
         }
 
+        //makes sure that on creation randomly generated bonuses don't overlap with a unit
         private bool IsPointInAGameUnit(Point position, List<GameUnit> allUnitsInTheGameSoFar)
         {
             foreach (var unit in allUnitsInTheGameSoFar)

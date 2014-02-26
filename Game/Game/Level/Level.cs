@@ -5,8 +5,6 @@
 
     public abstract class Level
     {
-        List<Enemy> enemies;
-
         abstract public Player Player
         { get; }
 
