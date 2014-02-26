@@ -9,17 +9,16 @@
     {
         public UnitStatus status = UnitStatus.Player;
         private const int MinRow = 3;
-
         private int currTopLeftRow;
         private int currTopLeftCol;
         private int healthPoints;
 
-        public Player(Point topLeft, char[,] image, Point speed,ConsoleColor color = ConsoleColor.Magenta)
+        public Player(Point topLeft, char[,] image, Point speed, ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed)
         {
             this.image = image;
-            currTopLeftRow = topLeft.Row;
-            currTopLeftCol = topLeft.Col;
+            this.currTopLeftRow = topLeft.Row;
+            this.currTopLeftCol = topLeft.Col;
             this.HealthPoints = 100;
             this.Weapon = new Weapon("Common weapon", ShotCoords(),
                 new char[,] { { '*' } }, new Point(-1, 0), 3);
@@ -45,8 +44,10 @@
             }
         }
 
+        public Point MaxMovePoint { get; set; }
+
         public int Score { get; set; }
-        public Weapon Weapon { get; private set; }
+        public IWeapon Weapon { get; private set; }
 
         public override char[,] GetImage()
         {
@@ -84,7 +85,7 @@
 
         public IList<MovingUnit> Shoot()
         {
-            this.Weapon.TopLeftCoords = new Point(this.currTopLeftRow, ((2 * this.currTopLeftCol + this.GetImage().GetLength(1)) / 2));
+            this.Weapon.Position = ShotCoords();
             return this.Weapon.GetWeapon();
         }
 
@@ -144,14 +145,14 @@
                 this.currTopLeftCol = 0;
             }
 
-            if (this.currTopLeftCol > GameProgram.WORLD_COLS - this.image.GetLength(1))
+            if (this.currTopLeftCol > this.MaxMovePoint.Col - this.image.GetLength(1))
             {
-                this.currTopLeftCol = GameProgram.WORLD_COLS - this.image.GetLength(1);
+                this.currTopLeftCol = this.MaxMovePoint.Col - this.image.GetLength(1);
             }
 
-            if (this.currTopLeftRow > GameProgram.WORLD_ROWS - this.image.GetLength(0) - 1)
+            if (this.currTopLeftRow > this.MaxMovePoint.Row - this.image.GetLength(0) - 1)
             {
-                this.currTopLeftRow = GameProgram.WORLD_ROWS - this.image.GetLength(0) - 1;
+                this.currTopLeftRow = this.MaxMovePoint.Row - this.image.GetLength(0) - 1;
             }
 
             this.TopLeftCoords = new Point(currTopLeftRow, currTopLeftCol);

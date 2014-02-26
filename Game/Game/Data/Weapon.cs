@@ -6,14 +6,15 @@
     using System.Collections.Generic;
     public class Weapon : MovingUnit, IWeapon
     {
-        private const int MinRow = 3;
-        private string name;
-        private int damage;
-        private int ammo;
+        private const int MinMoveRow = 3;
 
         public UnitStatus status = UnitStatus.Weapon;
+        private string name;
+        private int damage;
+        private int ammo;       
 
-        public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, ConsoleColor color = ConsoleColor.Magenta)
+        public Weapon(string name, Point topLeft, char[,] image, Point speed, int damage, 
+            ConsoleColor color = ConsoleColor.Magenta)
             : base(topLeft, image, speed, color)
         {
             this.Name = name;
@@ -34,6 +35,17 @@
                     throw new ArgumentException("Incorrect name!");
                 }
                 this.name = value;
+            }
+        }
+        public Point Position
+        {
+            get
+            {
+                return this.topLeftCoords;
+            }
+            set
+            {
+                this.topLeftCoords = value;
             }
         }
 
@@ -93,7 +105,7 @@
 
         public override void Move()
         {
-            if (this.topLeftCoords.Row <= MinRow || this.topLeftCoords.Col <= 0)
+            if (this.topLeftCoords.Row <= MinMoveRow || this.topLeftCoords.Col <= 0)
             {
                 this.isDestroyed = true;
             }
