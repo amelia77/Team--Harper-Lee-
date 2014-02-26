@@ -175,9 +175,18 @@
                 }
                 catch
                 {
-                    string exceptionMessage = "You are dead";
-                    this.renderer.WriteOnPosition(exceptionMessage, new Point(1, 1),
-                        exceptionMessage.Length + 10, ConsoleColor.Red);
+                    string exceptionMessage = "You are dead.";
+                    this.renderer.ClearScreen();
+                    this.renderer.DrawTextBoxTopLeft(exceptionMessage, 
+                        Console.WindowWidth/2 - 6, 
+                        Console.WindowHeight/2 - 2, ConsoleColor.Red);
+                    Thread.Sleep(1000);
+                    this.renderer.ClearScreen();
+                    this.renderer.DrawTextBoxTopLeft("Try again!",
+                        Console.WindowWidth / 2 - 5,
+                        Console.WindowHeight / 2 - 2, ConsoleColor.Red);
+                    Thread.Sleep(1000);
+                    this.Break();
                 }
 
                 Thread.Sleep(300);
