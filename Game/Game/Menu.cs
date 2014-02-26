@@ -1,12 +1,13 @@
-﻿using Game.Data;
-using Game.Interfaces;
-using Game.Tools;
-using System;
-using System.Threading;
-using Game.Levels;
-
-namespace Game
+﻿namespace Game
 {
+    using Game.Data;
+    using Game.Interfaces;
+    using Game.Tools;
+    using System;
+    using System.Threading;
+    using Game.Levels;
+
+    //Loads Start Menu
     public class Menu
     {
         private static int choice;
@@ -23,6 +24,7 @@ namespace Game
             "Exit"
         };
 
+        //navigates menu with arrow keys
         private static string ChooseFromMenu(IConsoleRenderer renderer)
         {
             while (true)
@@ -84,6 +86,7 @@ namespace Game
             }
         }
 
+        //chooses level with user input
         public static int ChooseLevel(IConsoleRenderer renderer, IUserInterface keyboard)
         {
             bool in_loop = true;
@@ -109,9 +112,11 @@ namespace Game
             return choice;
         }
 
+        //initializes level
         public static void InitializeLevel(IConsoleRenderer renderer, IUserInterface keyboard, Engine engine)
         {
             int choice = ChooseLevel(renderer, keyboard);
+
             switch (choice)
             { 
                 case 1:
@@ -134,6 +139,7 @@ namespace Game
             }
         }
 
+        //navigates player choice menu
         public static void InitializePlayer(IConsoleRenderer renderer, IUserInterface keyboard, Engine engine)
         {
             bool inLoop = true;

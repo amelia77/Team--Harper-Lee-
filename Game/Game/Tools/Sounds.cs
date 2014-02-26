@@ -10,13 +10,16 @@
     public static class Sounds
     {
         public enum SoundEffects { Move, Shoot, EnemyIsDestroyed, BossIsDestroyed, RecieveBonus, GameOver }
+
         const string path = @"..\..\music\";
+
         public static Thread musicThread;
         static bool musicOn = true;
         static bool sfxOn = true;
         static bool musicAvalible = true;
 
-        static Sounds() // A static constructor to load the game music when the method class is first used
+        // A static constructor to load the game music when the method class is first used
+        static Sounds() 
         {
             try
             {
@@ -26,6 +29,7 @@
                     StartMusic();
                 }
             }
+
             catch
             {
 
@@ -36,12 +40,14 @@
         {
             SFX(SoundEffects.Move);
         }
+
         public static bool SfxON
         {
             get
             {
                 return sfxOn;
             }
+
             set
             {
                 if (value && !sfxOn)
@@ -55,12 +61,14 @@
                 }
             }
         }
+
         public static bool MusicOn
         {
             get
             {
                 return musicOn;
             }
+
             set
             {
                 if (value && !musicOn && musicAvalible)
@@ -92,6 +100,7 @@
                     break;
             } 
         }
+
         internal static void PlaySoundFromFile(string filePath)
         {
             using (SoundPlayer player = new SoundPlayer(filePath))
@@ -102,17 +111,20 @@
                     player.PlayLooping();
 
                 }
+
                 finally
                 {
                     Sounds.SfxON = false;
                 }
             }
         }
+
         internal static void StopMusic()
         {
             musicThread.Abort();
             musicThread = new Thread(new ThreadStart(PlayMusic));
         }
+
         internal static void StartMusic()
         {
             musicThread.Start();

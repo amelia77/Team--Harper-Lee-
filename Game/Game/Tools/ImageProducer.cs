@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
     using System.IO;
+
+    //Summary:
+    //Get image from txt file and return a char[,] matrix of its image
     public static class ImageProducer
     {
-        //Get image from txt file and return a char[,] matrix of its image
         public static char[,] GetImage(string imageFile)
         {
 

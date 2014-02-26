@@ -5,12 +5,16 @@
     using Game.Interfaces;
     using Game.Tools;
 
+    //Summary:
+    //Describes the different units in the game
     public abstract class GameUnit : IObjectRenderable, IMovable, IObjectProducer, ICollidable
     {
+        
         protected Point topLeftCoords; //top left object point
         protected char[,] image; //image of the object 
         protected bool isDestroyed; // is object already destroyed
 
+        
         protected GameUnit(Point topLeftCoords, char[,] image, ConsoleColor color = ConsoleColor.Magenta)
         {
             this.TopLeftCoords = topLeftCoords;
@@ -19,6 +23,7 @@
             this.ImageColor = color;
         }
 
+        //properties
         public ConsoleColor ImageColor { get; set; }
 
         public Point TopLeftCoords
@@ -45,27 +50,26 @@
             }
         }
 
+
+        //methods
+
+        //gets appropriate image for a game unit
         public virtual char[,] GetImage()
         {
             return this.CopyImageMatrix(this.image);
         }
 
-        public Point GetTopLeftCoords() //Return Top left Point(X,Y) of current image
-        {
-            return this.topLeftCoords;
-        }
-
+        //populates a list of game units
         public virtual IEnumerable<GameUnit> ProduceObjects()
         {
             return new List<GameUnit>();
         }
 
-        public abstract void Move();
-
         public virtual void RespondToCollision(CollisionData collisionData)
         {
         }
 
+        
         public virtual List<Point> GetCollisionProfile()
         {
             List<Point> profile = new List<Point>();
@@ -93,6 +97,14 @@
         public virtual UnitStatus GetStatus()
         {
             return UnitStatus.EmptyUnit;
+        }
+
+        public abstract void Move();
+
+        //Returns Top left Point(X,Y) of current image
+        public Point GetTopLeftCoords()
+        {
+            return this.topLeftCoords;
         }
 
         private char[,] CopyImageMatrix(char[,] matrixToCopy)

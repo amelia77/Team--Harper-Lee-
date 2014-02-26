@@ -1,6 +1,8 @@
 ﻿namespace Game.Interfaces
 {
     using System;
+    //Summary:
+    //Event handlers
     public interface IUserInterface
     {
         event EventHandler OnLeftPressed;

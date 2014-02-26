@@ -23,6 +23,7 @@
         private Player player; //player
         private Stopwatch stopWatch;
 
+        //constructors
         public Engine(IConsoleRenderer renderer, IUserInterface userInterface, 
             GameUnitGenerator unitGenerator)
         {
@@ -47,6 +48,7 @@
             this.movingObjects.Add(obj);
             this.allObjects.Add(obj);
         }
+
         public void AddPlayer(GameUnit obj)
         {
             //first remove old player from the list
@@ -54,11 +56,13 @@
             this.player.MaxMovePoint = new Point(renderer.RenderFieldMatrixRows, renderer.RenderFieldMatrixCols);
             GameUnit foundUnit = allObjects.Find(x => x.GetTopLeftCoords().Equals(player.GetTopLeftCoords()));
             allObjects.Remove(foundUnit);
-
-            this.player = obj as Player; //add the new player
+            
+            //add the new player
+            this.player = obj as Player; 
             this.AddStaticObject(obj);
         }
 
+        //methods
         public virtual void MovePlayerLeft()
         {
             this.player.MoveLeft(); 
