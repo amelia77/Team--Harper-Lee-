@@ -99,14 +99,7 @@
 
         public override void RespondToCollision(CollisionData collisionData)
         {
-            if (collisionData.CollisionForceDirection.Row * this.TopLeftCoords.Row < 0)
-            {
-                this.isDestroyed = true;
-            }
-            if (collisionData.CollisionForceDirection.Col * this.TopLeftCoords.Col < 0)
-            {
-                this.isDestroyed = true;
-            }
+            this.isDestroyed = true;
         }
 
         public override void Move()
